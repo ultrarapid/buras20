@@ -1,0 +1,747 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
+blockquote,th,td {margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+q:before,q:after { content:""; }
+abbr,acronym { border:0; }
+
+html {
+    background: url(/buras/img/background-large.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+div.main-nav ul li a {
+  color: #333;
+}
+
+
+/*    highlighted material   */
+
+div.main-nav ul li a.active, div.main-nav ul li a:hover, div.sub-nav ul li a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+h2.page-header {
+  background-color: #363;
+  color: white;
+}
+
+div.super-top {
+  background-color: #666;
+}
+
+div.super-top {
+  border-bottom: 1px solid white;
+}
+
+/*     shadows     */
+
+div.top-wrap, div.page-wrap {
+  background: url(/buras/img/texture5-dark.jpg) #aaa;
+}
+
+
+div.page-header-wrap, div.top-header-wrap, div.page-extras-box-wrap {
+  background-color: #aaa;
+}
+
+
+/*   page backgrounds  */
+
+div.top, div.page {
+  background-color: #fff;
+}
+
+h1.top-header, h1.top-header a {
+  background-color: #363;
+  color: white;
+}
+
+div.status h3.status-header span.status-header-inline {
+  background-color: #eee;
+  color: #333;
+}
+
+div.page-extras-box {
+  background-color: #eee;
+}
+
+div.div-more-posts a {
+  background-color: #eee;
+  border: 1px solid #aaa;
+  color: #363;
+}
+
+div.div-gbpost p.body {
+  border-top: 5px solid #363;
+}
+
+div.div-gbpost p span.caption {
+  background-color: #ddd;
+  color: #242;
+}
+
+div.div-table table.table-standings tbody tr.tr-even td {
+  background-color: #ddd;
+}
+
+div.player-stat span {
+  background-color: #eee;
+}
+
+div.player-filler {
+  background-color: #ccc;
+}
+
+div.status div.status-date {
+  color: #555;
+}
+
+div.full-column, div.small-content {
+  border-bottom: 5px solid #363;
+}
+
+div.game-box {
+  background-color: #eee;
+}
+
+div.game-data p.game-date {
+  color: #363;
+}
+
+
+
+
+div.top-footer, div.page-top {
+
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: Arial, Helvetica, sans-serif; }
+
+h1 { font-size: 2.0em; }
+h2 { font-size: 1.8em; }
+h3 { font-size: 1.6em; }
+h4 { font-size: 1.4em; }
+h5 { font-size: 1.2em; }
+h6 { font-size: 1.1em; }
+
+/*      navigation     */ 
+
+div.nav ul {
+  float: left;
+  list-style-type: none;
+}
+
+div.nav ul li a{
+  display: block;
+  padding: 4px;
+  text-decoration: none;
+}
+
+/*     main nav     */
+
+div.main-nav {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px 0 0 10px;
+}
+
+div.main-nav ul {
+  margin: 0 0 14px 0;
+}
+
+div.main-nav ul li {
+  border-right: 1px dotted #bbb;
+  float: left;
+  padding: 3px;
+}
+
+div.main-nav ul li a {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0 4px;
+  padding: 4px 8px;
+  letter-spacing: -0.06em;
+}
+
+
+
+/*  sub navigation  */
+
+div.sub-nav {
+  /*
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  margin: 0 0 0 18px;
+  top: 10px;
+  */
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 14px 0 0 14px;
+}
+
+div.sub-nav ul {
+  margin: 0;
+}
+
+div.sub-nav ul li {
+  padding: 0;
+}
+
+div.sub-nav ul li span {
+  display: block;
+}
+/*
+div.sub-nav ul li:after {
+  content: "//";
+}
+*/
+div.sub-nav ul li a {
+  color: #333;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 2px 0px;
+  padding: 3px 3px;
+  letter-spacing: -0.06em;
+}
+
+
+
+/*    layout    */
+
+div.super-top {
+  /*
+  height: 20px;
+  */
+}
+
+div.wrapper {
+  margin: 0 auto;
+  padding: 10px;
+  width: 960px;
+}
+
+div.top-wrap {
+  margin-top: 30px;
+  padding: 10px;
+}
+
+div.top {
+  margin: -20px 0 0 -20px;
+}
+
+div.top-header-wrap {
+  display: inline-block;
+  margin: 20px 0 0 0;
+  padding: 4px;
+}
+
+h1.top-header {
+  display: inline-block;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 2.0em;
+  font-weight: bold;
+  letter-spacing: -0.06em;
+  margin: -8px 0 0 -8px;
+  padding: 2px 12px;
+}
+
+h1.top-header a {
+  text-decoration: none;
+}
+
+div.page-wrap {
+  margin: 50px 0 100px 0;
+  padding: 10px;
+}
+
+div.page {
+  margin: -20px 0 0 -20px;
+  padding: 0 0 110px 0;
+  /*padding: 24px;*/
+}
+
+div.page-header-wrap {
+  display: inline-block;
+  margin: 24px 0 0 0;
+  padding: 4px;
+}
+
+h2.page-header {
+  display: inline-block;
+  font-size: 1.4em;
+  font-weight: bold;
+  letter-spacing: -0.03em;
+  margin: -8px 0 0 -8px;
+  padding: 5px 15px;
+  text-transform: uppercase;
+}
+
+div.page-content {
+  margin: 20px 0 0 150px;
+}
+
+div.page-content-full {
+  padding: 20px 0 0 50px;
+
+}
+
+div.page-body {
+/*  width: 300px;*/
+}
+
+div.page-extras {
+  float: right;
+  width: 200px;
+  margin: 140px 40px 0 0;
+}
+
+div.page-extras-box-wrap {
+  padding: 4px;
+}
+
+div.page-extras-box {
+  margin: -8px 0 0 -8px;
+}
+
+
+/*     startpage     */
+
+div.full-column {
+  text-align: center;
+  margin: 0 80px 100px 50px;
+  padding: 0 0 100px 0;
+}
+
+div.news-data {
+  float: left;
+  margin: 70px 10px 0 0;
+  width: 300px;
+}
+
+div.small-content {
+  float: right;
+  margin: 0 0 100px;
+  padding: 0 0 100px;
+}
+
+div.game-data {
+  float: right;
+  margin: 70px 0 0 10px;
+  width: 180px;
+}
+
+div.game-box {
+  margin: 0 0 15px 0;
+  padding: 10px;
+  text-align: center;
+}
+
+div.game-box p.game-date {
+  text-align: center;
+  font-size: 2.4em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+div.game-box p.game-team, div.game-box p.game-homegame {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+}
+
+div.game-box p.game-opponent {
+  color: #363;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+
+/*    status    */
+
+div.status {
+  margin: 45px 0 0 24px;
+}
+
+div.status-left {
+  float: left;
+  height: 60px;
+  width: 25px;
+}
+
+div.status h3.status-header {
+  font-weight: bold;
+  letter-spacing: -0.06em;
+  margin: 8px 190px 0 80px;
+}
+
+div.status div.status-body {
+  line-height: 1.7em;
+  margin: 12px 190px 0 85px;
+}
+
+div.status div.status-date {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 0.7em;
+  margin: 6px 0 10px 90px;  
+}
+
+div.status div.status-day {
+  font-size: 1.2em;
+
+}
+
+div.status div.status-month {
+
+}
+
+div.status div.status-year {
+
+}
+
+
+
+
+.div-comment-count {
+  position:relative;
+  padding:1px;
+  margin:20px 0 0.5em;
+  color:#333;
+  background:#363;
+  text-align: center;
+  width: 36px;
+  /* css3 */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* creates the triangle */
+.div-comment-count:after {
+  content:"";
+  position:absolute;
+  top:22px;
+  left:12px;
+  border:10px solid transparent;
+  border-top-color:#363;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+
+.div-comment-count p a {
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  letter-spacing: -0.09em;
+  text-decoration: none;
+}
+
+
+div#div-section-7 p.page-body {
+  margin-right: 170px;
+}
+
+
+/*      herr-start       */
+div#div-section-5 div.bbcode_right img.bbcode_img {
+  left: -30px;
+  position: relative;
+  top: -400px;
+}
+
+
+table.game-status thead td {
+  font-weight: bold;
+}
+
+table.game-status tr td {
+  padding: 6px;
+}
+
+table.game-status tr td.game-score {
+  text-align: center; 
+}
+
+/*      matchinfo     */
+
+div.game-details {
+  padding: 0 130px 0 0;
+}
+
+p.game-details-score {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+/*     players    */
+
+div.player-status {
+  height: 60px;
+}
+
+div.player-status img {
+  float: left;
+}
+
+div.player-status img.player-large {
+  float: right;
+  margin: 0 30px 0 0;
+  width: 300px;
+}
+
+div.player-status p.player-name-list {
+  font-size: 1.3em;
+  margin: 0 0 0 65px;
+  padding: 10px 0 0 0;
+}
+
+div.player-status p.player-name-details {
+  font-size: 2.5em;
+}
+
+div.player-filler {
+  float: left;
+  height: 50px; 
+  width: 50px;
+}
+
+div.player-stat {
+  font-size: 0.8em;
+  margin: 16px 0 0 0;
+}
+
+div.player-stat-value {
+  font-size: 1.5em;
+}
+
+
+/*      table     */
+
+div.div-table {
+  margin: 30px 0 0 150px;
+}
+
+div.div-table table.table-standings td {
+  padding: 5px 12px;
+}
+
+div.div-table table.table-standings tbody td {
+  font-size: 1.3em;
+  text-align: right;
+}
+
+div.div-table table.table-standings tbody td.td-team {
+  text-align: left;
+}
+
+div.div-table table.table-standings thead th {
+  padding: 0 0 10px 0;
+  text-align: center;
+}
+
+div.div-table table.table-standings thead th.th-team {
+  padding: 0 0 0 12px;
+  text-align: left;
+}
+
+/*    guestbook     */
+
+form#form-gb div.div-inputs {
+  margin: 30px 300px 20px 60px;
+}
+
+form#form-gb div.div-inputs label {
+  display: block;
+  font-size: 0.8em;
+  margin: 10px 0 0 0;
+}
+
+form#form-gb div.div-inputs input {
+  font-size: 1.3em;
+}
+
+form#form-gb div.div-inputs textarea {
+  height: 140px;
+  width: 600px;
+}
+
+form#form-gb div.div-inputs input.input_submit {
+  font-weight: bold;
+  margin: 4px 0 0 0;
+  padding: 6px;
+}
+
+div#div-game, div#div-msg1, div#div-msg3 {
+  display: none;
+}
+
+div.div-gbpost p span.caption {
+  display: block;
+  font-size: 0.8em;
+  padding: 2px;
+  width: 40px;
+}
+
+div.div-gbpost p.name span.value {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+div.div-gbposts {
+  margin: 50px 300px 0 60px;
+}
+
+div.div-gbpost {
+  margin: 0 0 80px 0;
+}
+
+div.div-gbpost p.body {
+  line-height: 1.6em;
+  margin: 8px 0 0 0;
+  padding: 8px 0 0 0;
+}
+
+div.div-gbpost p.misc-info span.date-value {
+  display: inline-block;
+  font-size: 0.8em;
+  width: 160px;
+}
+
+div.div-gbpost p.misc-info span.team-value {
+  display: inline-block;
+  font-size: 0.8em;
+  margin: 0 30px 0 0;
+}
+
+div.div-gbpost p.misc-info a.url-value {
+  display: inline-block;
+  font-size: 0.8em; 
+}
+
+div.div-more-posts a {
+  display: block;
+  font-size: 1.3em;
+  height: 40px;
+  margin: 0 0 0 60px;
+  padding: 12px 0 0 0;
+  text-align: center;
+  text-decoration: none;
+  width: 600px;
+}
+
+
+/*    post-settings   */
+ul.body-list {
+  list-style-type: disc;
+  line-height: 0.8em;
+  margin-left: 25px;
+}
+
+ul.body-list li {
+  
+}
+
+
+/*   wishlist  */
+
+span.wishlist-name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+p.wishlist-intro {
+  font-size: 1.4em;
+  font-style: italic;
+}
+
+
+
+
+
+/*      generic      */
+
+span.oversized-character {
+  font-size: 0.8em;
+}
+
+div.clear {
+  clear: both;
+}
+
+
+/* Basic formats */
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+/* Global align classes */
+
+.left {
+  text-align: inherit;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.full {
+  text-align: justify
+}
+
+/* Image and table specific aligns */
+
+img.left, table.left, div.left {
+  float: left;
+  text-align: inherit;
+}
+
+img.center, table.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: inherit;
+}
+
+img.center {
+  display: block;
+}
+
+img.right, table.right, div.right {
+  float: right;
+  text-align: inherit;
+}
+
+body.mceContentBody { 
+   background: #fff; 
+}

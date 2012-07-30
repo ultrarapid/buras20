@@ -1,0 +1,508 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
+blockquote,th,td {margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+q:before,q:after { content:""; }
+abbr,acronym { border:0; }
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+}
+
+div.content {
+	background: transparent url(/img/admin/admin-horizontal-line.png) repeat-x 0 144px;
+}
+
+body {
+	background: #e7e7e7 url(/img/admin/body-bg.png) repeat-y 0 0;
+}
+
+div.logo a {
+	background: transparent url(/img/admin/admin-logo.png) no-repeat 0 0;
+}
+
+div.menu {
+  background: #044f10 url(/img/admin/admin-menu-back.png) repeat-x 0 0;
+}
+
+div.menu ul li a, div.menu ul li.active a, div.menu ul li a:hover, div.submenu ul li a.btn-add, div.submenu ul li a.btn-list {
+	background-image: url(/img/admin/admin-sprite.png);
+	background-repeat: no-repeat;
+}
+
+div.menu, h1, h2, h3, h4, h5 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+	font-size: 1.6em;
+	font-weight: bold;
+}
+
+div.logo {
+	position: absolute;	left: 54px; top: 24px;
+}
+
+div.logo a {
+	display: block;
+	height: 71px; width: 133px;
+	text-indent: -9999px;	
+}
+
+div.menu {
+	float: left;
+	min-height: 1000px;
+	margin: 0 0 0 40px;
+	text-align: center;
+	width: 157px;
+}
+
+div.menu ul {
+	margin: 130px 0 0 0;
+}
+
+div.menu ul li a {
+	background-position: -1px -30px;
+	color: #fff;
+	display: block;
+	font-size: 0.9em;
+	font-weight: bold;
+	height: 27px; width: 159px;
+	margin: 0 0 4px 0;
+	padding: 6px 0 0 0;
+	text-decoration: none; text-shadow: 1px 1px 1px #000; text-transform: uppercase;
+}
+
+div.menu ul li.active a {
+	background-position: -1px -63px;
+	color: #0a3f17;
+	height: 31px;
+	margin: 0;
+	text-shadow: none;
+}
+
+div.menu ul li a:hover {
+	background-position: -1px -63px;
+	color: #0a3f17;
+	height: 31px;
+	margin: 0;
+	text-shadow: none;
+}
+
+div.submenu {
+	position: absolute;	left: 308px; top: 96px;
+}
+
+div.submenu ul li {
+	float: left;
+	margin: 0 12px 0 0;
+}
+
+div.submenu ul li a.btn {
+	background-color: #999;
+	border: 1px solid #888;
+	border-radius: 4px;
+	box-shadow: inset 0 0 2px #ccc;
+	color: white;
+	display: block;
+	height: 21px;
+	padding: 3px 8px;
+	text-decoration: none;
+}
+
+div.submenu ul li a.btn:hover, div.submenu ul li.active a.btn {
+	background-color: #777;
+	border: 1px solid #fff;
+	box-shadow: inset 0 0 2px #333;	
+	color: #333;
+}
+
+div.submenu ul li a.btn-add {
+	background-position: -1px 0;
+	display: block;
+	height: 30px; width: 29px;
+	position: absolute; left: -51px;
+	text-indent: -9999px;
+}
+
+div.submenu ul li a.btn-add:hover {
+	background-position: -30px 0;
+}
+
+div.submenu ul li.active a.btn-add {
+	background-position: -30px 0;
+}
+
+div.submenu ul li a.btn-list {
+	background-position: -59px 0;
+	display: block;
+	height: 30px; width: 29px;
+	text-indent: -9999px;
+}
+
+div.submenu ul li a.btn-list:hover, div.submenu ul li.active a.btn-list {
+	background-position: -88px 0;
+}
+
+div.submenu ul li a.btn-settings {
+	background-color: #999;
+	border: 1px solid #888;
+	border-radius: 4px;
+	box-shadow: inset 0 0 2px #ccc;
+	color: white;
+	display: block;
+	height: 21px;
+	padding: 3px 8px;
+	position: absolute; left: 560px; top: 0px;
+	text-decoration: none;
+	width: 126px; 
+}
+
+div.submenu ul li a.btn-settings:hover {
+	background-color: #777;
+	border: 1px solid #fff;
+	box-shadow: inset 0 0 2px #333;	
+	color: #333;
+}
+
+div.submenu ul li a.btn-logout {
+	background-color: #999;
+	border: 1px solid #888;	border-radius: 4px;
+	box-shadow: inset 0 0 2px #ccc;
+	color: white;
+	display: block;
+	height: 21px;
+	margin: 0 0 0 16px;
+	padding: 3px 8px;
+	position: absolute; left: 700px; top: 0px;	
+	text-decoration: none;
+	width: 62px;	
+}
+
+div.submenu ul li a.btn-logout:hover {
+	background-color: #777;
+	border: 1px solid #fff;
+	box-shadow: inset 0 0 2px #333;	
+	color: #333;
+}
+
+div.content {
+		margin: 0 60px 0 240px;
+		padding: 157px 0 0 18px;
+}
+
+div.content h1 {
+	color: #8e8e8e;
+	font-size: 3.5em; font-weight: bold;
+	position: absolute; left: 254px; top: 24px;
+  text-shadow: 0px 2px 3px #fff; text-transform: uppercase;
+}
+
+
+/* form test */
+
+/* *********    standard forms   *********** */
+
+div.div_form_section {
+
+}
+
+div.div_form_section_one {
+	float: left;	
+	width: 22em;
+}
+
+div.div_form_section_two {
+	margin: 0 0 0 300px;
+	min-height: 490px;
+	width: 36em;
+}
+
+div.div_input label, div.div_textarea label, div.div_extra label, div.div_select label {
+	display: block;
+	font-size: 0.8em;
+	margin: 10px 0 0 0;
+}
+
+div.div_input label span, div.div_textarea label span, div.div_extra label span, div.div_select label span,div.div_radio_wrap label span {
+	background-color: #ccc;
+}
+
+div.div_input {
+	margin-bottom: 10px;
+}
+
+div.div_input input {
+	font-size: 1.3em;
+	margin: 0 0 18px 0;
+	padding: 2px;
+	width: 13em;
+}
+
+
+
+div.div_select select, div.div_extra select, div.div_input select {
+	font-size: 1.3em;
+	margin: 0;
+	padding: 2px;
+}
+
+div.div_textarea textarea {
+	font-size: 1.5em;
+}
+
+div.div_radio_wrap label span{
+	font-size: 0.8em;
+}
+
+div.div_radio {
+	margin: 2px 0 20px 0;
+}
+
+div.div_radio_wrap input {
+	height: 1.3em;
+	width: 1.3em;
+}
+
+input.input_submit {
+	font-size: 1.1em;
+	margin: 18px 0;
+	padding: 10px;
+}
+
+p.p_result {
+	font-size: 1.3em;
+	height: 26px;
+	margin: 26px 0 0 0;
+}
+
+div.div_link {
+	margin: 10px 0;
+}
+
+
+/*
+form.standard div label {
+	display: block;
+	font-size: 0.9em;
+	float: left;
+	width: 8em;
+}
+
+form.standard input[type=text] {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1em;
+}
+
+form.standard  > div {
+	margin: 0 0 8px 0;
+}
+
+
+form.standard div.div_radio_wrap {
+	margin: 0 0 1px 0;
+}
+
+*/
+
+div.div_result {
+	margin: 0 0 0 0;
+}
+
+div.div_periodresult {
+	margin: 0 0 0 0;
+}
+
+
+div.div-add {
+	margin: 0 0 10px 0;
+}
+
+div.div-add p a {
+	background-color: #ddd;
+	color: black;
+	padding: 3px;
+	text-decoration: none;
+}
+
+div.div-add p a:hover {
+	background-color: #363;
+	color: white;
+}
+
+
+
+
+table.table_admin_small {
+	font-size: 0.9em;
+}
+
+table.table_admin_small tr.tr_even td {
+	background-color: #ccc;
+}
+
+table.table_admin_small td {
+	padding: 5px;
+	height: 30px;
+}
+
+table.table_admin_small td.td_info {
+	padding-right: 50px;
+}
+
+table.table_admin_small td.td_edit {
+	padding: inherit 25px;
+}
+
+table.table_admin_small td.td_player_img span.image_replacer{
+	background-color: #999;
+	display: block;
+	height: 30px; width: 30px;
+}
+
+table.table_admin_small td.td_player_img img {
+	width: 30px;
+}
+
+table.table_admin_small thead {
+	border-bottom: 1px solid #bbb;
+	font-size: 0.7em;	font-weight: bold;
+	text-transform: uppercase;
+}
+
+
+
+/*       contacts     */
+
+h3.header_contact {
+	color: #044f10;
+	float: left;
+	font-size: 1.2em;
+	margin: 0 8px 0 0;
+}
+
+div.div_contact_radios {
+	margin: 2px 0 0 0;
+}
+
+div.div_contact_radios label {
+	font-size: 0.8em;
+	margin: 0 12px 0 4px;
+	vertical-align: 2px;
+}
+
+div.div_contact_dropdown {
+	font-size: 0.6em;
+	margin: 0 4px 0 36px;
+}
+
+input.input_contact_submit {
+	font-size: 0.7em;
+	margin: 0 0 20px 20px;
+	padding: 5px 8px;
+}
+
+
+
+
+
+/*   guestpost admin  */
+
+table.table_admin_guestposts td.td_info {
+	padding: 5px;
+}
+
+table.table_admin_guestposts td.gpost_date {
+	width: 140px;
+}
+
+
+table.table_admin_roles td.section-name {
+	min-width: 200px;
+}
+
+
+div.admin_roles h3 {
+	color: #333;
+	margin: 0 0 14px 0;
+}
+
+div.admin_roles table {
+	margin: 0 0 30px 0;
+}
+
+.clear {
+	clear:both;
+}
+
+
+
+/* Basic formats */
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+/* Global align classes */
+
+.left {
+	text-align: inherit;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.full {
+	text-align: justify
+}
+
+/* Image and table specific aligns */
+
+img.left, table.left, div.left, p.left {
+	float: left;
+	text-align: inherit;
+}
+
+img.center, table.center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: inherit;
+}
+
+img.center {
+	display: block;
+}
+
+img.right, table.right, div.right, p.right {
+	float: right;
+	text-align: inherit;
+}
+
+body.mceContentBody { 
+   background: #fff; 
+}

@@ -1,0 +1,373 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,pre,form,fieldset,input,textarea,p,
+blockquote,th,td {margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { margin:0; padding:0; font-size:100%; font-weight:normal; }
+q:before,q:after { content:""; }
+abbr,acronym { border:0; }
+
+body {
+	background-color: #e5e5e5; /* text: #097442; color: #03542e; */
+	font-family: "Droid Serif", Georgia, Serif;
+}
+
+.wrapper {
+	padding: 10px 9% 20px 9%;
+}
+
+@media all and (max-width : 1010px) {
+
+	.wrapper {
+		padding: 10px 0 20px 0;
+	}
+
+}
+
+.section-header h1 {
+	float: left;
+}
+
+.section-header h1 a {
+	background: transparent url(/img/buras-logo-solid.png) no-repeat 67px 0;
+	border-right: 1px dotted #ccc;
+	color: #555;	
+	display: inline-block;
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	margin: 0 0 0 14px;
+	padding: 105px 28px 0 5px;
+	text-transform: uppercase;	
+	text-decoration: none;
+}
+
+.section-header a .first-part {
+	display: block;
+	font-size: 4.0em;
+	font-weight: bold;
+	letter-spacing: -0.04em;
+	line-height: 0.9em;
+	text-shadow: 2px 2px 0 #fff;
+}
+
+.section-header a .second-part {
+	font-size: 1em;
+	font-weight: bold;
+	letter-spacing: 0.87em;
+	margin-left: 5px;
+	text-shadow: 1px 1px 0 #fff;
+	text-transform: uppercase;
+}
+
+.section-extras-nav {
+	float: left;
+}
+
+.navigation-wrapper {
+	float: left; 
+}
+
+.nav {
+	margin-left: 34px;
+}
+
+.main-nav ul {
+	padding: 12px 0 0;
+}
+
+.main-nav li {
+	float: left;
+	padding: .2em 1.5em .3em 0;	
+}
+
+.main-nav li a {
+	color: #555;
+	display: inline-block;
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	padding: 1px 3px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.main-nav li .active {
+
+}
+
+
+.section-header, .main-nav {
+	zoom: 1\9; /* IE8 and below clearfix */ 
+}
+
+.main-nav:after, .section-header:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.sub-nav li {
+	float: left;
+	padding: 0 1.5em .3em 0;	
+}
+
+.sub-nav li a {
+	color: #555;
+	display: inline-block;
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	font-size: 0.7em;
+	font-weight: bold;
+	padding: 1px 3px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.nav li a:hover, .nav li a.active, .season-nav li a.active {
+	background-color: #03542e;
+	color: #fff;
+}
+
+.calendar ol li {
+	color: #03542e;
+}
+
+.page {
+	margin: 1em 0 0;
+	padding: 0.3em 1.5em;
+	background: #e5e5e5;
+}
+
+.page-wrap {
+
+}
+
+.extras {
+/*	position: absolute; left: 100px; top: 10px; */
+	height: 96px;
+	margin-left: 40px;
+
+}
+
+.extras:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.extras article {
+	float: left;
+	font-size: 0.8em;
+	margin-right: 50px;
+	width: 200px;
+}
+
+.extras h3 {
+	color: #888;
+	text-transform: uppercase;
+}
+
+
+/* slider start */
+.slider-wrapper {
+	background-color: white;
+	float: left;
+	width: 100%;
+  max-width: 960px;
+  padding: 8px;  
+  box-shadow: 0px 1px 5px 0px #b5b5b5; -webkit-box-shadow: 0px 1px 5px 0px #b5b5b5; -moz-box-shadow: 0px 1px 5px 0px #b5b5b5;
+}
+
+.page .slider-wrapper .nivoSlider {
+	background-color: white;
+	margin-bottom: 0px;
+  -webkit-box-shadow: 0px 0px 0px 0px #fff;
+  -moz-box-shadow: 0px 0px 0px 0px #fff;
+  box-shadow: 0px 0px 0px 0px #fff;
+}
+/* slider end */
+
+
+/*  calendar start  */
+section.calendar {
+	font-family: Arimo, Arial, Helvetica, Tahoma; font-weight: bold;
+	float: left;
+	width: 310px;
+}
+
+section.calendar ol li {
+	display: inline-block;
+	*float: left;
+	font-size: 1.1em; font-weight: bold;
+	height: 27px; width: 40px;
+	text-align: center;
+}
+
+section.calendar time {
+	display: inline-block;
+	text-align: center;
+}
+
+section.calendar time a {
+	color: #444;
+	display: block;
+	height: 27px; width: 40px;
+	padding: 9px 0 0;
+	text-decoration: none;
+}
+
+section.calendar time a:hover {
+	background-color: #d5d5d5;
+
+}
+
+section.calendar time.other-month a {
+	color: #bbb;
+}
+
+section.calendar time.other-month a:hover {
+	background-color: transparent;
+}
+
+section.calendar time.sunday a {
+	color: #933;
+}
+/*  calendar end  */
+
+
+
+
+
+
+/* team statistics */
+
+.graph {
+	margin: 0 20px 0 0;
+	width: 400px;
+}
+
+.graph canvas {
+	float: left;
+}
+
+.series-statistics {
+	margin: 0 20px 0 0;
+}
+
+.series-statistics ul {
+	list-style-type: none;
+}
+
+.series-statistics ul li {
+	float: left;
+	margin: 8px 0 8px 20px;
+}
+
+.series-statistics ul li span{
+	border: 1px solid #666;
+	border-radius: 2px;
+	display: inline-block;
+	margin: 15px 12px 0 0;
+	height: 22px; width: 22px;
+	vertical-align: -6px;
+}
+
+@media all and (min-width : 961px) {
+
+	nav.season-nav {
+		position: absolute; top: 210px;
+	}
+
+	nav.season-nav ul {
+		position: absolute;	left: -80px;
+	}
+
+}
+
+nav.season-nav ul li {
+	color:#333;
+	border:0px solid red;
+	font-family: Arimo, Arial, Helvetica, sans-serif;	
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+nav.season-nav ul li a {
+	color: #aaa;
+	padding: 1px 3px;
+	text-decoration: none;
+}
+
+
+
+
+
+
+/* Basic formats */
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+/* Global align classes */
+
+.left {
+	text-align: inherit;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.full {
+	text-align: justify
+}
+
+/* Image and table specific aligns */
+
+img.left, table.left, div.left {
+	float: left;
+	text-align: inherit;
+}
+
+img.center, table.center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: inherit;
+}
+
+img.center {
+	display: block;
+}
+
+img.right, table.right, div.right {
+	float: right;
+	text-align: inherit;
+}
+
+.clear {
+	clear: both;
+}
+
+body.mceContentBody { 
+   background: #fff; 
+}

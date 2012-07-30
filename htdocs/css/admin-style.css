@@ -1,0 +1,108 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
+blockquote,th,td {margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+q:before,q:after { content:""; }
+abbr,acronym { border:0; }
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+}
+
+div.menu, h1, h2, h3, h4, h5 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	background: #e7e7e7 url(/img/admin/body-bg.png) repeat-y 0 0;
+}
+
+div.logo {
+	position: absolute;	left: 54px; top: 24px;
+}
+
+div.logo a {
+	background: transparent url(/img/admin/admin-logo.png) no-repeat 0 0;
+	display: block;
+	height: 71px; width: 133px;
+	text-indent: -9999px;	
+}
+
+div.menu {
+  background: #044f10 url(/img/admin/admin-menu-back.png) repeat-x 0 0;
+	float: left;
+	height: 100%;
+	margin: 0 0 0 40px;
+	text-align: center;
+	width: 157px;
+}
+
+div.menu ul {
+	margin: 130px 0 0 0;
+}
+
+div.menu ul li a {
+	background: transparent url(/img/admin/admin-sprite.png) no-repeat -1px -30px;
+	color: #fff;
+	display: block;
+	font-size: 0.9em;
+	font-weight: bold;
+	height: 27px; width: 159px;
+	margin: 0 0 4px 0;
+	padding: 6px 0 0 0;
+	text-decoration: none; text-shadow: 1px 1px 1px #000; text-transform: uppercase;
+}
+
+div.menu ul li.active a {
+	background: transparent url(/img/admin/admin-sprite.png) no-repeat -1px -63px;
+	color: #0a3f17;
+	height: 31px;
+	margin: 0;
+	text-shadow: none;
+}
+
+div.menu ul li a:hover {
+	background: transparent url(/img/admin/admin-sprite.png) no-repeat -1px -63px;
+	color: #0a3f17;
+	height: 31px;
+	margin: 0;
+	text-shadow: none;
+}
+
+div.submenu {
+	position: absolute;	left: 258px; top: 100px;
+}
+
+div.submenu ul li {
+	float: left;
+	margin: 0 12px 0 0;
+}
+
+div.content {
+	  background: transparent url(/img/admin/admin-horizontal-line.png) repeat-x 0 130px;
+		margin: 0 60px 0 240px;
+		padding: 145px 0 0 18px;
+}
+
+div.content h1 {
+	color: #8e8e8e;
+	font-size: 4em; font-weight: bold;
+	position: absolute; left: 254px; top: 24px;
+  text-shadow: 0px 2px 3px #fff; text-transform: uppercase;
+}
+
+div.clear {
+	clear:both;
+}

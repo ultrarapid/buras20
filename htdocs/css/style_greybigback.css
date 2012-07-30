@@ -1,0 +1,166 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
+blockquote,th,td {margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+q:before,q:after { content:""; }
+abbr,acronym { border:0; }
+
+html {
+	background: url(/buras/img/background-large.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.wrapper {
+	padding: 10px 5% 20px 5%;
+
+}
+
+.page {
+	background-color: rgb(255,255,255);
+	background-color: rgba(255,255,255,0.58);
+	width: 90%;
+}
+
+.top-header {
+	background: transparent url(/buras/img/buras-logo-transparent.png) no-repeat 0 4px;
+	max-width: 10em;
+	padding: 10px 30px 30px 100px;
+}
+
+.top-header a {
+	font-family: "Arimo", Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.top-header a span {
+	display: block;
+}
+
+.top-header .header-firstpart {
+	color: #333;
+	font-size: 2.7em;
+	font-weight: bold;	
+	letter-spacing: -0.06em;
+}
+
+.top-header .header-secondpart {
+	color: #2f855d;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin: 0 0 0 12px;
+	letter-spacing: -0.02em;
+}
+
+
+.extras {
+	background-color: rgb(255,255,255);
+	background-color: rgba(255,255,255,0.58);
+	padding: 1%;
+	position: absolute;	right: 20%; top: 0;
+}
+
+
+.main-nav {
+	background-color: rgb(186,186,185);
+	background-color: rgba(104,102,102,0.28);
+	float: left;
+	padding: 10px;
+	position: relative; right: 6px;
+	margin: 3px 0 0 0;
+}
+
+.sub-nav ul li{
+	float: left;
+}
+
+.sub-nav:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/*      generic      */
+
+span.oversized-character {
+	font-size: 0.8em;
+}
+
+div.clear {
+	clear: both;
+}
+
+
+/* Basic formats */
+
+.bold {
+	font-weight: bold;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+/* Global align classes */
+
+.left {
+	text-align: inherit;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	text-align: right;
+}
+
+.full {
+	text-align: justify
+}
+
+/* Image and table specific aligns */
+
+img.left, table.left, div.left {
+	float: left;
+	text-align: inherit;
+}
+
+img.center, table.center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: inherit;
+}
+
+img.center {
+	display: block;
+}
+
+img.right, table.right, div.right {
+	float: right;
+	text-align: inherit;
+}
+
+.mceContentBody { 
+   background: #fff; 
+}

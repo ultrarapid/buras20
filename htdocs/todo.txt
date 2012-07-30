@@ -1,0 +1,30 @@
+
+  
+	uppdatera:
+	js-mappen
+	formatter
+	index
+	layout
+	
+	email-obfuscator script (lägg in i spara)
+	matcha alla eposter, byt ut tecken
+	
+	
+	6. script hämta matcher / stats / tabell från gibf // cacha upp detta.
+	
+	1. dubbelkolla rättigheter (en ide med ytterliggare säkerhet  att kombinera teamsection och pagesection?)
+	 så att rikard kan få ut sina uppgifter, ändra spelare, nyheter, matcher, flytta spelarredigering till playersedit inte useredit
+	
+	2. admin ui
+	
+	4. front design
+	
+	5. lägga till händeserapportering från matcher.
+	
+	7. fixa så att man kan lägga in formationer (sista steget funkade inte)
+	
+	3. bildskript till spelare, sen till matcher (lägg in några manuellt på match?)
+	
+	8. yui för att göra charts.
+	
+	

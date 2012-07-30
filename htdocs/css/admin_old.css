@@ -1,0 +1,246 @@
+@charset "utf-8";
+/* CSS Document */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
+blockquote,th,td {margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+q:before,q:after { content:""; }
+abbr,acronym { border:0; }
+
+
+
+/* ********* admin confirmed **************** */
+
+body {
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
+div.div_clear, div.clear {
+	clear: both;
+}
+
+ul.admin-nav {
+	background-color: #ccc;
+	margin: 10px 0 10px;
+}
+
+ul.admin-nav li {
+	float: left;
+  margin: 0 4px;
+}
+
+ul.admin-nav li a {
+	color: black;
+	padding: 4px;
+	text-decoration: none;
+}
+
+ul.admin-nav li a:hover {
+	background-color: #363;
+	color: white;
+}
+
+div.page {
+	margin: 30px 0 0 20px;
+}
+
+
+
+
+/* *********    standard forms   *********** */
+
+div.div_form_section {
+	float: left;
+
+}
+
+div.div_form_section_one {
+	width: 22em;
+}
+
+div.div_form_section_two {
+	width: 30em;
+}
+
+div.div_input label, div.div_textarea label, div.div_extra label, div.div_select label {
+	display: block;
+	font-size: 0.8em;
+	margin: 10px 0 0 0;
+}
+
+div.div_input label span, div.div_textarea label span, div.div_extra label span, div.div_select label span {
+	background-color: #eee;
+}
+
+div.div_input {
+	margin-bottom: 10px;
+}
+
+div.div_input input {
+	font-size: 1.3em;
+	margin: 0 0 18px 0;
+	padding: 2px;
+	width: 13em;
+}
+
+
+
+div.div_select select, div.div_extra select, div.div_input select {
+	font-size: 1.3em;
+	padding: 2px;
+}
+
+div.div_textarea textarea {
+	font-size: 1.5em;
+}
+
+div.div_radio_wrap label span {
+	background-color: #eee;
+	font-size: 0.8em;
+}
+
+div.div_radio {
+	margin: 2px 0 20px 0;
+}
+
+div.div_radio_wrap input {
+	height: 1.3em;
+	width: 1.3em;
+}
+
+input.input_submit {
+	font-size: 1.1em;
+	margin: 18px 0;
+	padding: 10px;
+}
+
+p.p_result {
+	font-size: 1.3em;
+	height: 26px;
+	margin: 26px 0 0 0;
+}
+
+div.div_link {
+	margin: 10px 0;
+}
+
+
+/*
+form.standard div label {
+	display: block;
+	font-size: 0.9em;
+	float: left;
+	width: 8em;
+}
+
+form.standard input[type=text] {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1em;
+}
+
+form.standard  > div {
+	margin: 0 0 8px 0;
+}
+
+
+form.standard div.div_radio_wrap {
+	margin: 0 0 1px 0;
+}
+
+*/
+
+div.div_result {
+	margin: 0 0 0 0;
+}
+
+div.div_periodresult {
+	margin: 0 0 0 0;
+}
+
+
+div.div-add {
+	margin: 0 0 10px 0;
+}
+
+div.div-add p a {
+	background-color: #ddd;
+	color: black;
+	padding: 3px;
+	text-decoration: none;
+}
+
+div.div-add p a:hover {
+	background-color: #363;
+	color: white;
+}
+
+/* *********    text feedback   *********** */
+
+.div_text_feedback {
+	width: 400px;
+}
+
+.div_common_message {
+	background-color: #ccc;
+	border: 1px solid #555;
+}
+
+.div_deleted_message {
+	background-color: #6c9;
+	border: 1px solid #063;
+}
+
+.div_saved_message {
+	background-color: #6c9;
+	border: 1px solid #063;
+}
+
+.div_error_message {
+	background-color: #f66;
+	border: 1px solid #900;
+}
+
+
+
+/* *********    admin games    ************ */
+
+.form_standard .div_radio {
+}
+
+.form_standard .div_radio label {
+}
+
+.form_standard .div_radio input {
+	/*float: left;*/
+}
+
+.div_input label, .div_textarea label, .div_select label {
+
+}
+
+
+/* ***   admin season team players ***** */
+
+div.div_playerlistwrapper {
+	width: 400px;
+}
+
+div.div_pickedplayerlist {
+	float: right;
+}
+
+
+/*        get season schedule       */
+
+table.table-schedule td {
+	padding: 2px;
+}
+
+table.table-schedule tbody tr.tr-exists td {
+	color: #ccc;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Title of document</title>
+</head>
+
+<body>
+		<script type="text/javascript">
+		//var url = "http://www.asdf.se/category-c-123-1.aspx";
+		//var url = "http://www.asdf.se/katt/category-c-222.aspx";
+		var url = "http://www.asdf.se/cat-c-32-dfg-c-cegory-c-981-1.aspx";
+		//var aCat = url.substr(url.lastIndexOf('-c-')+3);
+			//var patt = "/(?<=-c-)\d+/g";
+			alert(url.substr(url.lastIndexOf('-c-')+3).match(/^\d+/g));
+			//var sText = aText.substr(aText.indexOf('-c-'));
+			//var cNr = sTex
+			//alert(sText);
+/*
+
+// Mimic leading, negative lookbehind like replace(/(?<!es)t/g, 'x')
+var output = 'testt'.replace(/(es)?t/g, function($0, $1){
+	return $1 ? $0 : 'x';
+});
+// output: xestx
+
+*/
+
+			
+		</script>
+
+</body>
+
+</html>

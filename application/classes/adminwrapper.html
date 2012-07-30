@@ -1,0 +1,40 @@
+<?php
+class AdminWrapper extends ApplicationWrapper
+{
+
+  /**
+   * Returns the menu from admin context
+   *
+   * @return array() of sections
+   */
+  public function GetMenu()
+  {
+    $adminSection = self::GetSection();
+    return $adminSection->GetMenu(0);
+  }
+
+  /**
+   * Return adminsection object for admin context
+   *
+   * @return AdminSection
+   */
+  public function GetSection()
+  {
+    if ( empty(self::$_init) ) {
+      self::$_init = 1;
+      self::$_section = new AdminSection();
+    }
+    return self::$_section;
+  }
+
+  /**
+   * Returns the submenu from admin context
+   *
+   * @return array() of sections
+   */
+  public function GetSubMenu()
+  {
+    $adminSection = self::GetSection();
+    return $adminSection->GetMenu(self::$_parent);
+  }
+}

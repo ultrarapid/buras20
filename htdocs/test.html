@@ -1,0 +1,25 @@
+<?php
+
+$sectionRoutingString = "'/^nyheter(.*)/' => 'posts/index/1\1', '/^blogg(.*)/' => 'posts/index/1\1'";
+
+$routing = array(
+	'/^admin\/(.*?)\/(.*)/' => '\1/admin_\2',
+	'/^ajax\/(.*?)\/(.*)/' 	=> '\1/ajax_\2',
+	$sectionRoutingString
+	//'/^nyheter(.*)/'		=> 'posts/index/1\1'
+	//'/^om-oss(.*)/'			=> 'posts/index/5',
+	//'/^portfolio(.*)/' 		=> 'posts/index/1',
+	//'/^utveckling(.*)/'		=> 'posts/index/6',
+	//'/^([^\/]*)$/'			=> 'posts/tags/\1'
+	/*
+	'/^kassa(.*)/' 			=> 'orders/index\1',	
+	'/^login(.*)/' 			=> 'users/login\1',
+	'/^shop(.*)/' 			=> 'products/index\1',	
+	'/^webbshop(.*)/' 		=> 'pages/work'
+	*/
+);
+
+print_r($routing);
+
+
+?>
