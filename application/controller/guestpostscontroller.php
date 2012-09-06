@@ -137,7 +137,7 @@ Morbi pharetra vulputate eros, in sagittis tellus commodo quis. Phasellus sit am
 	
 	private function ValidateInputs()
 	{
-		return array('name', 'email', 'text2');
+		return array('name', 'text2');
 	}
 	
 	

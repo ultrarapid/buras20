@@ -5,7 +5,7 @@
                 <input name="data[name]" type="text" id="input_name" value="" />
               </div>
               <div class="div_input" id="div-email">
-                <label class="label_input" for="input_email"><span>Epost* (visas ej p&aring; sidan)</span></label>
+                <label class="label_input" for="input_email"><span>Epost (visas ej p&aring; sidan)</span></label>
                 <input name="data[email]" type="text" id="input_email" value="" />
               </div>
               <div class="div_input" id="div-url">
@@ -42,22 +42,22 @@
               <p class="name">
                 <span class="value"><?= $post['Guestpost']['name'] ?></span>
               </p>
+              <p class="body"><?= Formatter::ConvertLinebreaksToBr($post['Guestpost']['body']) ?></p>
               <p class="misc-info">
-                <span class="date-value">@ <?= Formatter::ReadableDate($post['Guestpost']['created']) . ' ' . substr($post['Guestpost']['created'], 11, 5) ?></span>
+                <span class="date-value">- <?= Formatter::ReadableDate($post['Guestpost']['created']) . ' ' . substr($post['Guestpost']['created'], 11, 5) ?></span>
 <?php      if ( !empty($post['Guestpost']['team']) ) : ?>
                 <span class="team-value"><?= $post['Guestpost']['team'] ?></span>
 <?php      endif; ?>
 <?php      if ( !empty($post['Guestpost']['url']) ) : ?>
                 <a href="<?= ( ( substr($post['Guestpost']['url'], 0, 7) == 'http://' ) ? $post['Guestpost']['url'] : 'http://' . $post['Guestpost']['url'] ) ?>" class="url-value" rel="nofollow"><?= ( ( strlen($post['Guestpost']['url']) > 40 ) ? substr($post['Guestpost']['url'], 0, 40) : $post['Guestpost']['url'] ) ?></a>
 <?php      endif; ?>
-              </p>
-              <p class="body"><?= Formatter::ConvertLinebreaksToBr($post['Guestpost']['body']) ?></p>            
+              </p>        
             </div>
 <?php    endforeach; ?>
           </div>
 <?php    if ( $amount > ($k+1) ) : ?>
           <div class="div-more-posts">
-            <a id="more-posts" href="#">Visa fler</a>
+            <a id="more-posts" href="#">Visa fler &raquo;</a>
             <input type="hidden" value="<?= $post['Guestpost']['id'] ?>" id="last_id" />
           </div>
 <?php    endif; ?>

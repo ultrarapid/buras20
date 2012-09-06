@@ -377,9 +377,184 @@ nav.season-nav ul li {
 }
 
 nav.season-nav ul li a {
-	color: #aaa;
+	color: #bbb;
 	padding: 1px 3px;
 	text-decoration: none;
+}
+
+
+/*  guest posts */
+
+
+form#form-gb div.div-inputs {
+	margin: 30px 300px 20px 0;
+}
+
+form#form-gb div.div-inputs label {
+	display: block;
+	font-size: 0.8em;
+	margin: 10px 0 0 0;
+}
+
+form#form-gb div.div-inputs input {
+	font-size: 1.3em;
+}
+
+form#form-gb div.div-inputs textarea {
+	height: 140px;
+	width: 600px;
+}
+
+form#form-gb div.div-inputs input.input_submit {
+	font-weight: bold;
+	margin: 4px 0 0 0;
+	padding: 6px;
+}
+
+div#div-game, div#div-msg1, div#div-msg3 {
+	display: none;
+}
+
+div.div-gbpost p span.caption {
+	display: block;
+	font-size: 0.8em;
+	padding: 2px;
+	width: 40px;
+}
+
+div.div-gbpost p.name {
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	font-size: 1.8em;
+	font-weight: bold;
+	margin: 0 0 0 16px;
+}
+
+div.div-gbposts {
+	margin: 50px 300px 0 0;
+	max-width: 700px;
+}
+
+div.div-gbpost {
+  margin: 0 0 80px 0;
+}
+
+div.div-gbpost p.body {
+	background-color: #f5f5f5;
+	line-height: 1.6em;
+  margin: 24px 0 0;
+	padding: 0 26px 46px 24px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+/* creates the triangle */
+.div-gbpost p.body:before {
+	content:"";
+	position:relative; left:1px; top: -26px;
+	border:15px solid transparent;
+	border-bottom-color: #f5f5f5;
+    /* reduce the damage in FF3.0 */
+  display:block; 
+  width:0;
+}
+
+div.div-gbpost p.misc-info {
+	color: #666;
+	margin: 4px 0 0 24px;
+}
+
+div.div-gbpost p.misc-info span.date-value {
+	display: inline-block;
+	font-size: 0.8em;
+	width: 160px;
+}
+
+div.div-gbpost p.misc-info span.team-value {
+	display: inline-block;
+	font-size: 0.8em;
+	margin: 0 30px 0 0;
+}
+
+div.div-gbpost p.misc-info a.url-value {
+	display: inline-block;
+	font-size: 0.8em;	
+}
+
+div.div-more-posts a {
+	color: #333;
+	display: block;
+	font-size: 1.3em;
+	height: 40px;
+	margin: 0 0 40px;
+	padding: 12px 0 0 0;
+	text-align: center;
+	width: 600px;
+}
+
+
+
+/*  guest posts end */
+
+
+
+/*  games */
+
+table.game-status td {
+	color: #222;
+	padding: 8px 34px 8px 0;
+}
+
+
+/*  table  */
+
+table.table-standings td {
+	color: #222;
+	padding: 5px 10px 0 0;
+}
+
+
+/*  players page  */
+
+/*     players    */
+
+div.player-status {
+	height: 60px;
+}
+
+div.player-status img {
+	float: left;
+}
+
+div.player-status img.player-large {
+	float: right;
+	margin: 0 30px 0 0;
+	width: 300px;
+}
+
+div.player-status p.player-name-list {
+  font-size: 1.3em;
+	margin: 0 0 0 65px;
+	padding: 10px 0 0 0;
+}
+
+div.player-status p.player-name-details {
+  font-size: 2.5em;
+}
+
+div.player-filler {
+	float: left;
+	height: 50px;	
+	width: 50px;
+}
+
+div.player-stat {
+	font-size: 0.8em;
+	margin: 16px 0 0 0;
+}
+
+div.player-stat-value {
+	font-size: 1.5em;
 }
 
 
