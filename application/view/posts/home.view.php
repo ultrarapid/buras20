@@ -3,10 +3,6 @@
 <?php else: ?>
           <div id="div-section-<?= $section['Section']['id'] ?>" class="page-content-full">
 <?php endif; ?>
-
-
-
-
             <div class="slider-wrapper theme-default">
               <div id="slider" class="nivoSlider">
                 <img src="/img/nivo/slide1.jpg" alt="" />
@@ -19,11 +15,12 @@
                 <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
               </div>            
             </div>
-
             <section class="calendar">
+              <a href="#" class="month-prev month-arrow">&lt;</a>
               <header>
-                <h3>Juni 2012</h3>
+                <h3><span class="month">Juni</span><span class="year">2012</span></h3>
               </header>
+              <a href="#" class="month-next month-arrow">&gt;</a>
               <ol>
                 <li>M</li>
                 <li>Ti</li>
@@ -69,25 +66,10 @@
               <time datetime="2012-06-30"><a href="#">30</a></time>
               <time datetime="2012-07-01" class="other-month"><a href="#">01</a></time>
             </section>
-
-
             <div class="clear"></div>
-
-
-
-
-
-
-
-
 <?php	if ( isset($section['Section']['body']) ) : ?>
             <div class="page-body">
-
-
-
-
 <?= Formatter::ConvertLinebreaksToBr(Formatter::ConvertLocalLinks($section['Section']['body'])) ?>
-
             </div>
 <?php	endif; ?>
 

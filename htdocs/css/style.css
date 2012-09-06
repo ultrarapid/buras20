@@ -12,10 +12,15 @@ h1,h2,h3,h4,h5,h6 { margin:0; padding:0; font-size:100%; font-weight:normal; }
 q:before,q:after { content:""; }
 abbr,acronym { border:0; }
 
+html {
+	background-color: #e5e5e5;
+}
+
 body {
-	background-color: #e5e5e5; /* text: #097442; color: #03542e; */
 	font-family: "Droid Serif", Georgia, Serif;
 }
+
+.jsActive body { visibility: hidden; }
 
 .wrapper {
 	padding: 10px 9% 20px 9%;
@@ -133,8 +138,12 @@ body {
 	color: #fff;
 }
 
-.calendar ol li {
+.calendar ol li, .calendar header .month {
 	color: #03542e;
+}
+
+.calendar header .year {
+	color: #444;
 }
 
 .page {
@@ -145,6 +154,13 @@ body {
 
 .page-wrap {
 
+}
+
+.page .page-header {
+	color: #ccc;
+	font-family: Arimo, Arial, Helvetica, sans-serif; font-weight: bold; font-size: 1.2em;
+	margin: 0 0 14px;
+	text-transform: uppercase;
 }
 
 .extras {
@@ -179,6 +195,7 @@ body {
 .slider-wrapper {
 	background-color: white;
 	float: left;
+	height: 470px;
 	width: 100%;
   max-width: 960px;
   padding: 8px;  
@@ -199,7 +216,39 @@ body {
 section.calendar {
 	font-family: Arimo, Arial, Helvetica, Tahoma; font-weight: bold;
 	float: left;
+	margin: 0 0 0 22px;
+	text-align: center;
 	width: 310px;
+}
+
+section.calendar a.month-arrow {
+	color: #bbb;
+	font-size: 2.4em;
+	font-weight: bold;
+	margin: 0 16px;
+	text-decoration: none;
+}
+
+section.calendar header {
+	display: inline-block;
+	vertical-align: 6px;
+}
+
+section.calendar header h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 0 16px 12px 0;
+	margin-right: 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+section.calendar header .month {
+	margin: 0 4px 0 0;
+}
+
+section.calendar header .year {
+
 }
 
 section.calendar ol li {
@@ -241,6 +290,34 @@ section.calendar time.sunday a {
 }
 /*  calendar end  */
 
+
+
+/*  news posts start  */
+
+article.status {
+	margin: 2px 0 20px;
+}
+
+article.status div.status-body {
+	padding: 10px 10px 10px 0;
+	max-width: 40em;
+}
+
+article.status header h3 {
+	color: #444;
+	font-family: Arimo, Arial, Helvetica, Tahoma; font-weight: bold; font-size: 2.0em; font-weight: bold;
+}
+
+article.status time {
+	color: #777;
+	font-size: 0.8em;
+}
+
+article.status time span.at-character {
+	font-size: 0.7em;
+}
+
+/*  news posts end  */
 
 
 

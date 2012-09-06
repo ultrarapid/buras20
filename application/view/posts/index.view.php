@@ -9,12 +9,13 @@
 
             </div>
 <?php	endif; ?>
-
 <?php if ( $section['Section']['postsection'] == 2 ) : ?>
 <?php   foreach ( $posts as $post ) : ?>
-            <div class="status">
-              <h3 class="status-header"><span class="status-header-inline"><?= $post['Post']['header'] ?></span></h3>
-              <div class="status-left">
+            <article class="status">
+              <header>
+                <h3 class="status-header"><span class="status-header-inline"><?= $post['Post']['header'] ?></span></h3>
+              </header>
+              <section class="status-left">
 <?php      if ( $section['Section']['comment_enabled'] == 1 && !$singlepost ) : ?>
 <?php        $commentcount = 0; ?>
 <?php        if ( array_key_exists('Comment', $post) ) : ?>
@@ -28,10 +29,10 @@
                   </p>
                 </div>
 <?php      endif; ?>
-              </div>
-              <div class="status-date">
-                <div class="status-day"><span class="oversized-character">@</span> <?= Formatter::ReadableDate($post['Post']['created']) . ' ' . substr($post['Post']['created'], 11, 5) ?></div>
-              </div>
+              </section>
+              <section class="status-date">
+                <time datetime="<?= $post['Post']['created'] ?>" class="status-day"><span class="at-character">@</span> <?= Formatter::ReadableDate($post['Post']['created']) . ' <span class="status-time">' . substr($post['Post']['created'], 11, 5) ?></span></time>
+              </section>
               <div class="status-body">
 <?= Formatter::ConvertLinebreaksToBr(Formatter::ConvertLocalLinks($post['Post']['body'])) ?>
 
@@ -77,7 +78,7 @@
               </div>
 <?php     endif; ?>
               <div class="clear"></div>
-            </div>
+            </article>
 <?php		endforeach; ?>
 <?php	endif; ?>
           </div>

@@ -3,12 +3,13 @@
   <head>
     <title>Burås Innebandy - Göteborg</title>
     <meta charset="utf-8" />
-    <script type="text/javascript" src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <link type="text/css" href="//fonts.googleapis.com/css?family=Arimo:400,700,900|Droid+Serif:400,700,700italic,400italic" rel="stylesheet" >   
+    <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') ?>/public-preloader.js"></script>
+    <!--[if lt IE 9]>
+      <script src="<?= Anchors::Refer('javascript_folder') ?>/html5-js/dist/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="<?= Anchors::Refer('base') ?>/favicon.ico" />    
+    <link type="text/css" href="//fonts.googleapis.com/css?family=Arimo:400,700,900|Droid+Serif:400,700,700italic,400italic" rel="stylesheet"  />    
     <link type="text/css" href="<?= Anchors::Refer('stylesheet_folder') ?>/style.css" rel="stylesheet" />	
-    <link href="<?= Anchors::Refer('base') ?>/favicon.ico" rel="shortcut icon"  />
-    <link rel="stylesheet" href="<?= Anchors::Refer('javascript_folder') ?>/nivo/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="<?= Anchors::Refer('javascript_folder') ?>/nivo/nivo-slider/themes/default/default.css" type="text/css" media="screen" />
   </head>
   <body>
     <div class="section-login">
@@ -85,15 +86,25 @@
       </section>
       <div class="page">
         <div class="page-top"></div>
+<?php if ( !isset($removeHeader) ) : ?>
         <div class="page-header-wrap">
           <h2 class="page-header"><?= $section['Section']['header'] ?></h2>
-        </div>  
+        </div>
+<?php endif; ?>
         <div class="outer-content">
           
 <?= $layoutContent ?>
         </div>
       </div>    
-    </div>
+    </div>    
+<?php if ( isset($layoutBodyElements) ) : ?>
+<?php   foreach ( $layoutBodyElements as $be ) : ?>
+    <<?php echo $be['ElementName']; 
+          foreach ( $be['Attributes'] as $a ) : 
+            echo ' ' . $a['name'] . '="' . $a['value'] . '"'; 
+          endforeach; ?> />
+<?php   endforeach; ?>
+<?php endif; ?>
 <?php	if ( isset($layoutJavascripts) ) : ?>
 <?php		foreach	( $layoutJavascripts as $js ) : ?>
     <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') . '/' . $js ?>.js"></script>
@@ -109,6 +120,7 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
+    <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') ?>/public-postloader.js"></script>
     <form action="<?= $_SERVER['REQUEST_URI'] ?>">
       <input type="hidden" value="<?= Anchors::Refer('base') ?>" id="base" />
     </form>

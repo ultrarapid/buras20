@@ -85,7 +85,14 @@ class PostsController extends App_Controller
 
 	public function home()
 	{
-		$this->SetContext('public', array(0 => 'nivo/nivo-slider/jquery.nivo.slider.pack', 1 => 'nivo-loader'));
+		$this->Set('removeHeader', 1);
+		$attributes = array();
+		$attributes[] = array('name' => 'rel', 'value' => 'stylesheet');
+		$attributes[] = array('name' => 'href', 'value' => Anchors::Refer('javascript_folder') . '/nivo/nivo-slider/nsm.css');
+		$attributes[] = array('name' => 'type', 'value' => 'text/css');
+		$attributes[] = array('name' => 'media', 'value' => 'screen');
+
+		$this->SetContext('public', array(0 => 'nivo/nivo-slider/jquery.nivo.slider.pack', 1 => 'loader'), array(), array(0 => array('ElementName' => 'link', 'Attributes' => $attributes)));
 	}
 
 	public function index($section = 1, $year = '', $month = '', $post = '')

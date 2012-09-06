@@ -168,7 +168,7 @@ class App_Controller extends Controller
 		}
 	}
 	
-	protected function SetContext($context = 'public', $addedJavascripts = array())
+	protected function SetContext($context = 'public', $addedJavascripts = array(), $addedHeaderElements = array(), $addedBodyElements = array())
 	{
 		if ( $context == 'admin' ) {
 			$this->SettingsAdmin();							
@@ -188,7 +188,19 @@ class App_Controller extends Controller
 				$javascripts[] = $js;
 			}
 		}
-		$this->Set('layoutJavascripts', $javascripts);		
+		if ( !empty($addedHeaderElements) ) {			
+			foreach ( $addedHeaderElements as $ah ) {
+				$headerelements[] = $ah;
+			}
+		}
+		if ( !empty($addedBodyElements) ) {			
+			foreach ( $addedBodyElements as $ab ) {
+				$bodyelements[] = $ab;
+			}
+		}
+		$this->Set('layoutJavascripts', $javascripts);
+		$this->Set('layoutHeaderElements', $addedHeaderElements);
+		$this->Set('layoutBodyElements', $addedBodyElements);		
 	}
 	
 	protected function SetFeedback($type = 'text', $info = 'common', $text = '')

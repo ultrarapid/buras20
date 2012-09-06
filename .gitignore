@@ -1,2 +1,6 @@
 #settings
 config/connection.php
+
+#images
+htdocs/img
+htdocs/bilder
