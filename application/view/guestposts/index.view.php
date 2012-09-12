@@ -1,25 +1,29 @@
           <form id="form-gb" class="form_standard" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
             <div class="div-inputs">
-              <div class="div_input" id="div-name">
-                <label class="label_input" for="input_name"><span>Namn*</span></label>
-                <input name="data[name]" type="text" id="input_name" value="" />
+              <div class="field-1">
+                <div class="div_input" id="div-name">
+                  <label class="label_input" for="input_name"><span>Namn*</span></label>
+                  <input name="data[name]" type="text" id="input_name" value="" />
+                </div>
+                <div class="div_input" id="div-email">
+                  <label class="label_input" for="input_email"><span>Epost (frivilligt, visas ej p&aring; sidan)</span></label>
+                  <input name="data[email]" type="text" id="input_email" value="" />
+                </div>
               </div>
-              <div class="div_input" id="div-email">
-                <label class="label_input" for="input_email"><span>Epost (visas ej p&aring; sidan)</span></label>
-                <input name="data[email]" type="text" id="input_email" value="" />
-              </div>
-              <div class="div_input" id="div-url">
-                <label class="label_input" for="input_url"><span>Hemsida</span></label>
-                <input name="data[url]" type="text" id="input_url" value="" />
-              </div>
-              <div class="div_input" id="div-team">
-                <label class="label_input" for="input_team"><span>Lag</span></label>
-                <input name="data[team]" type="text" id="input_team" value="" />
-              </div>
-              <div class="div_input" id="div-game">
-                <label class="label_input" for="input_game"><span>Misc</span></label>
-                <input name="data[game]" type="text" id="input_game" value="" />
-              </div>            
+              <div class="field-2">
+                <div class="div_input" id="div-url">
+                  <label class="label_input" for="input_url"><span>Hemsida (frivilligt)</span></label>
+                  <input name="data[url]" type="text" id="input_url" value="" />
+                </div>
+                <div class="div_input" id="div-team">
+                  <label class="label_input" for="input_team"><span>Lag (frivilligt)</span></label>
+                  <input name="data[team]" type="text" id="input_team" value="" />
+                </div>
+                <div class="div_input" id="div-game">
+                  <label class="label_input" for="input_game"><span>Misc</span></label>
+                  <input name="data[game]" type="text" id="input_game" value="" />
+                </div>
+              </div>           
               <div class="div_textarea" id="div-msg1">
                 <label class="label_textarea" for="textarea_text1"><span>Meddelande*</span></label>
                 <textarea name="data[text1]" id="textarea_text1"></textarea>

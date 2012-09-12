@@ -390,6 +390,14 @@ nav.season-nav ul li a {
 
 /*  guest posts */
 
+form#form-gb div.field-1 {
+	float: left; 
+}
+
+form#form-gb div.field-2 {
+	margin: 40px 0 0 300px;
+/*	float: right; */
+}
 
 form#form-gb div.div-inputs {
 	margin: 30px 300px 20px 0;
@@ -398,11 +406,16 @@ form#form-gb div.div-inputs {
 form#form-gb div.div-inputs label {
 	display: block;
 	font-size: 0.8em;
-	margin: 10px 0 0 0;
+	margin: 0 0 3px;
+}
+
+form#form-gb div.div-inputs div.div_textarea label {
+	margin: 14px 0 0 0;
 }
 
 form#form-gb div.div-inputs input {
 	font-size: 1.3em;
+	margin-bottom: 8px;
 }
 
 form#form-gb div.div-inputs textarea {
@@ -444,24 +457,23 @@ div.div-gbpost {
 }
 
 div.div-gbpost p.body {
-	background-color: #f5f5f5;
+	background-color: #fff;
+	border: 1px solid #ccc;
 	line-height: 1.6em;
   margin: 24px 0 0;
-	padding: 0 26px 46px 24px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
+	padding: 0 26px 46px 34px;
 }
 
 /* creates the triangle */
 .div-gbpost p.body:before {
 	content:"";
-	position:relative; left:1px; top: -26px;
+	position:relative; left:1px; top: -30px;
 	border:15px solid transparent;
-	border-bottom-color: #f5f5f5;
+	border-bottom-color: #ccc;
     /* reduce the damage in FF3.0 */
   display:block; 
   width:0;
+  z-index: 1;
 }
 
 div.div-gbpost p.misc-info {
