@@ -50,7 +50,9 @@
    		fadeTime  = typeof fadeTime  !== 'undefined' ? fadeTime  : _defaultFadeTime;
 
     	for (var i = 0; i < _elementsToFade.length; i++) {
-    		$(_elementsToFade[i]).delay(startTime + i*delayTime).fadeTo(fadeTime, 1);
+        if ( $(_elementsToFade[i]).is(":visible") ) {
+          $(_elementsToFade[i]).delay(startTime + i*delayTime).fadeTo(fadeTime, 1);
+        }
     	}
     }
 

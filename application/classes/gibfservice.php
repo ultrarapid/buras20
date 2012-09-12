@@ -120,8 +120,6 @@ class GibfService {
 
 		} else {
 
-
-
 		}
 		
 		return $gibfArray;
@@ -202,7 +200,12 @@ class GibfService {
 
 	private function ExtractGameTime($row)
 	{
-		return $row->firstChild->nextSibling->getElementsByTagName("p")->item(0)->nodeValue;
+		if ( $row->firstChild->nextSibling->getElementsByTagName("p")->length > 0 ) {
+			return $row->firstChild->nextSibling->getElementsByTagName("p")->item(0)->nodeValue;
+		} else {
+			return '00:00:00';
+		}
+		
 	}
 	
 	private function ExtractPenalty($row)

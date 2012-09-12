@@ -181,13 +181,17 @@ body {
 .extras article {
 	float: left;
 	font-size: 0.8em;
-	margin-right: 50px;
-	width: 200px;
+	margin-right: 30px;
+	width: 220px;
 }
 
 .extras h3 {
 	color: #888;
 	text-transform: uppercase;
+}
+
+.extras time {
+	text-transform: capitalize;
 }
 
 
@@ -219,6 +223,7 @@ section.calendar {
 	margin: 0 0 0 22px;
 	text-align: center;
 	width: 310px;
+	display: none;
 }
 
 section.calendar a.month-arrow {

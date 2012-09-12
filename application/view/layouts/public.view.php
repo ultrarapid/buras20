@@ -29,7 +29,8 @@
               </header>
 <?php if ( $nextMensGame ) : ?>
               <p><?= ( $nextMensGame['Game']['homegame'] ? 'Hemma' : 'Borta' ) . ' mot: ' . $nextMensGame['Game']['opponent'] ?></p>
-              <time datetime="<?= substr($nextMensGame['Game']['gamedate'], 0, 16) ?>"><?= Formatter::ReadableDate($nextMensGame['Game']['gamedate']) . ' ' . substr($nextMensGame['Game']['gamedate'], 11, 5) ?></time>  <span>@ <?= $nextMensGame['Game']['location'] ?></span>
+              <time datetime="<?= substr($nextMensGame['Game']['gamedate'], 0, 16) ?>"><?= Formatter::ReadableDateWithDay($nextMensGame['Game']['gamedate']) . ' ' . substr($nextMensGame['Game']['gamedate'], 11, 5) ?></time>
+              <p>@ <?= $nextMensGame['Game']['location'] ?></p>
 <?php else : ?>
               <p>Ingen match bokad</p>
 <?php endif; ?>
@@ -40,7 +41,8 @@
               </header>
 <?php if ( $nextWomensGame ) : ?>
               <p><?= ( $nextWomensGame['Game']['homegame'] ? 'Hemma' : 'Borta' ) . ' mot: ' . $nextWomensGame['Game']['opponent'] ?></p>
-              <time datetime="<?= substr($nextWomensGame['Game']['gamedate'], 0, 16) ?>"><?= Formatter::ReadableDate($nextWomensGame['Game']['gamedate']) . ' ' . substr($nextWomensGame['Game']['gamedate'], 11, 5) ?></time>  <span>@ <?= $nextWomensGame['Game']['location'] ?></span>
+              <time datetime="<?= substr($nextWomensGame['Game']['gamedate'], 0, 16) ?>"><?= Formatter::ReadableDateWithDay($nextWomensGame['Game']['gamedate']) . ' ' . substr($nextWomensGame['Game']['gamedate'], 11, 5) ?></time>
+              <p>@ <?= $nextWomensGame['Game']['location'] ?></p>
 <?php else : ?>
               <p>Ingen match bokad</p>
 <?php endif; ?>
@@ -51,7 +53,8 @@
               </header>
 <?php if ( $nextEvent ) : ?>
               <p><?= $nextEvent['Event']['header'] ?></p>
-              <time datetime="<?= substr($nextEvent['Event']['eventdate'], 0, 16) ?>"><?= Formatter::ReadableDate($nextEvent['Event']['eventdate']) . ' ' . substr($nextEvent['Event']['eventdate'], 11, 5) ?></time>  <span>@ <?= $nextEvent['Event']['location'] ?></span>
+              <time datetime="<?= substr($nextEvent['Event']['eventdate'], 0, 16) ?>"><?= Formatter::ReadableDateWithDay($nextEvent['Event']['eventdate']) . ' ' . substr($nextEvent['Event']['eventdate'], 11, 5) ?></time>
+              <p>@ <?= $nextEvent['Event']['location'] ?></p>
 <?php else : ?>
               <p>Inget planerat</p>
 <?php endif; ?>

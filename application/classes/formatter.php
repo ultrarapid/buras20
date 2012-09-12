@@ -178,6 +178,38 @@ class Formatter
 	}
 
 	/**
+	* Changes a date into today, yesterday or the day name if from last week
+	* Otherwise returns it as day, monthname, year.
+	*
+	* @param  date $date Date in YYYY-MM-DD format
+	* @return string Date in converted format
+	*/
+	public static function ReadableDateWithDay($date)
+	{	
+		$year  = substr($date,0,4);
+		$month = substr($date,5,2);
+		$day   = substr($date,8,2);
+
+		$returnDate = $day . ' ' . substr(self::GetMonthName($month), 0, 3) . ' ' . $year;
+
+		if ( mktime(0,0,0,$month,$day,$year) == mktime(0,0,0,date('m'),date('d'), date('Y')) ) {
+			$returnDate = 'idag';
+		}
+		else if ( mktime(0,0,0,$month,$day,$year) == mktime(0,0,0,date('m'),date('d')-1, date('Y')) ) {
+			$returnDate = 'igår';
+		}
+		else if ( mktime(0,0,0,$month,$day,$year) == mktime(0,0,0,date('m'),date('d')+1, date('Y')) ) {
+			$returnDate = 'imorgon';
+		}		
+		else if ( mktime(0,0,0,$month,$day,$year) > mktime(0,0,0,date('m'),date('d')-7, date('Y')) && mktime(0,0,0,$month,$day,$year) < mktime(0,0,0,date('m'),date('d')+7, date('Y')) ) {
+			$returnDate = self::GetSwedishWeekday($date);			
+		} else {
+			$returnDate = self::GetSwedishWeekday($date) . ' ' . $returnDate;
+		}
+		return $returnDate;		
+	}
+
+	/**
 	* Strips anything that isn't 0-9 or -.
 	*
 	* @param  string $string
@@ -203,6 +235,41 @@ class Formatter
 		$string = str_replace($html,  $xml, $string);
 		$string = str_ireplace($html, $xml, $string); 
 		return $string; 
+	}
+
+	/**
+	* Returns swedish day of the week
+	*
+	* @param  string $date 'YYYY-MM-DD'
+	* @return string
+	*/
+	private static function GetSwedishWeekday($date)
+	{
+		$year  = substr($date,0,4);
+		$month = substr($date,5,2);
+		$day   = substr($date,8,2);
+
+		$weekday = date('w', mktime(0,0,0,$month,$day,$year));
+
+		$returnDate = '';
+
+		if ( $weekday == 0 ) {
+			$returnDate = 'söndag';
+		}	else if ( $weekday == 1 ) {
+			$returnDate = 'måndag';			
+		} else if ( $weekday == 2 ) {
+			$returnDate = 'tisdag';
+		} else if ( $weekday == 3 ) {
+			$returnDate = 'onsdag';
+		}	else if ( $weekday == 4 ) {
+			$returnDate = 'torsdag';
+		}	else if ( $weekday == 5 ) {
+			$returnDate = 'fredag';
+		} else if ( $weekday == 6 ) {
+			$returnDate = 'lördag';
+		}
+
+		return $returnDate;
 	}
 
 	/**

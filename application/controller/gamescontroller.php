@@ -110,6 +110,7 @@ class GamesController extends App_Controller
 		$getUrl = '';
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			if ( $_POST['form_id'] == 2 ) {
+				$getUrl = $_POST['getUrl'];
 				if (  array_key_exists('control', $_POST)) {
 					foreach ( $_POST['control'] as $k => $value ) {
 						$_POST['data'][$k]['team_id'] = $teamID;
@@ -118,8 +119,9 @@ class GamesController extends App_Controller
 						$this->Game->Save($_POST['data'][$k]);
 					}
 				}
-			}
-			$getUrl = $_POST['url'];
+			} else {
+				$getUrl = $_POST['post_url'];
+			}			
 			$seasonID = $_POST['season_id'];
 			$setSeason = current($this->Game->Season->GetById($seasonID));
 			$gibf = new GibfService();

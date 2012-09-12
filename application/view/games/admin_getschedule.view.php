@@ -1,5 +1,5 @@
 <form class="form-schedule-season" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
-  <input type="text" name="url" value="" />
+  <input type="text" name="post_url" value="" />
   <select name="season_id">
 <?php foreach ( $seasons as $s ) : ?>
     <option value="<?= $s['Season']['id'] ?>"<?= ( ( $s['Season']['id'] == $set_season['Season']['id'] ) ? ' selected="selected"' : '' ) ?>><?= substr($s['Season']['startdate'], 0, 4) . ' / ' . substr($s['Season']['enddate'], 0, 4) ?></option>
@@ -55,7 +55,7 @@
     </tbody>
   </table>
   <input type="hidden" name="season_id" value="<?= $set_season['Season']['id'] ?>" />
-  <input type="hidden" name="url" value="<?= $getUrl ?>" />
+  <input type="hidden" name="getUrl" value="<?= $getUrl ?>" />
   <input type="hidden" name="form_id" value="2" />
   <input type="hidden" id="checkbox_controller" value="0" />
   <input type="submit" value="lägg till valda" />
