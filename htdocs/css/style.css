@@ -458,7 +458,6 @@ div.div-gbpost {
 
 div.div-gbpost p.body {
 	background-color: #fff;
-	border: 1px solid #ccc;
 	line-height: 1.6em;
   margin: 24px 0 0;
 	padding: 0 26px 46px 34px;
@@ -469,7 +468,7 @@ div.div-gbpost p.body {
 	content:"";
 	position:relative; left:1px; top: -30px;
 	border:15px solid transparent;
-	border-bottom-color: #ccc;
+	border-bottom-color: #fff;
     /* reduce the damage in FF3.0 */
   display:block; 
   width:0;
@@ -639,4 +638,8 @@ img.right, table.right, div.right {
 
 body.mceContentBody { 
    background: #fff; 
+}
+
+div#main_map {
+	display: none;
 }

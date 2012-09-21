@@ -89,7 +89,7 @@ class Section extends App_Model
 
 	public function GetSectionSettings()
 	{
-		return array(2 => 'Inl&auml;ggssida', 1 => 'Statisk sida', 0 => 'Anpassad' );
+		return array(2 => 'Inläggssida', 1 => 'Statisk sida', 0 => 'Anpassad' );
 	}
 	
 	public function HasSubMenu($id)

@@ -32,4 +32,3 @@
 	define('DEFAULT_PARAMS', $a_startpage['Section']['params']);
 
 	define('DEFAULT_PARENT', 0);
-

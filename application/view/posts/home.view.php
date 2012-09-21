@@ -9,10 +9,10 @@
                 <a href="http://dev7studios.com">
                   <img src="/img/nivo/slide2.jpg" alt="" title="#htmlcaption" />
                 </a>
-                <img src="/img/nivo/slide3.jpg" alt="" title="This is an example of a caption" />
+                <img src="/img/nivo/slide3.jpg" alt="" title="Nu drar skiten snart igång igen!" />
               </div>
               <div id="htmlcaption" class="nivo-html-caption">
-                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                <strong>Det här är Anton</strong>
               </div>            
             </div>
             <section class="calendar">
