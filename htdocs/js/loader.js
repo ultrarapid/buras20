@@ -1,12 +1,13 @@
 (function($){
-	$(window).load(function(){
-  	$('#slider').nivoSlider({
-    	pauseTime: LoadController.getSlideTime(),
-    	afterLoad: LoadController.showElements()});
-	});
-	$(function() {
-		LoadController.hideElements();
-	});
+  $(window).load(function(){
+    $('#slider').nivoSlider({
+      pauseTime: LoadController.getSlideTime(),
+      afterLoad: LoadController.showElements()
+    });
+  });
+  $(function() {
+    LoadController.hideElements();
+  });
 })(jQuery);
 
 (function( LoadController, $, undefined ) {
@@ -31,7 +32,6 @@
    */
     var _defaultStartTime = 0;
 
-
     var _elementsToFade = ['.section-header header h1', '.extras', '.navigation-wrapper', '.slider-wrapper', '.calendar', '.page-body'];
 
     LoadController.getSlideTime = function() {
@@ -45,15 +45,15 @@
     }
 
     LoadController.showElements = function(startTime, delayTime, fadeTime) {
-      startTime = typeof startTime !== 'undefined' ? startTime : _defaultStartTime;        
-    	delayTime = typeof delayTime !== 'undefined' ? delayTime : _defaultDelayTime;
-   		fadeTime  = typeof fadeTime  !== 'undefined' ? fadeTime  : _defaultFadeTime;
+      startTime = typeof startTime !== 'undefined' ? startTime : _defaultStartTime;
+      delayTime = typeof delayTime !== 'undefined' ? delayTime : _defaultDelayTime;
+      fadeTime  = typeof fadeTime  !== 'undefined' ? fadeTime  : _defaultFadeTime;
 
-    	for (var i = 0; i < _elementsToFade.length; i++) {
+      for (var i = 0; i < _elementsToFade.length; i++) {
         if ( $(_elementsToFade[i]).is(":visible") ) {
           $(_elementsToFade[i]).delay(startTime + i*delayTime).fadeTo(fadeTime, 1);
         }
-    	}
+      }
     }
 
 }( window.LoadController = window.LoadController || {}, jQuery ));

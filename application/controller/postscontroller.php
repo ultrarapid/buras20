@@ -87,10 +87,17 @@ class PostsController extends App_Controller
 	{
 		$this->Set('removeHeader', 1);
 		$attributes = array();
-		$attributes[] = array('name' => 'rel', 'value' => 'stylesheet');
+		$attributes[] = array('name' => 'type', 'value' => 'text/css');		
 		$attributes[] = array('name' => 'href', 'value' => Anchors::Refer('javascript_folder') . '/nivo/nivo-slider/nsm.css');
-		$attributes[] = array('name' => 'type', 'value' => 'text/css');
+		$attributes[] = array('name' => 'rel', 'value' => 'stylesheet');
 		$attributes[] = array('name' => 'media', 'value' => 'screen');
+
+		$game = new Game();
+
+		$this->Set('previousMensGame', $game->GetPreviousGame(1));
+		$this->Set('previousWomensGame', $game->GetPreviousGame(2));
+		$this->Set('latestPosts', $this->Post->GetLatestPosts(1, 3));
+
 
 		$this->SetContext('public', array(0 => 'nivo/nivo-slider/jquery.nivo.slider.pack', 1 => 'loader'), array(), array(0 => array('ElementName' => 'link', 'Attributes' => $attributes)));
 	}
@@ -110,11 +117,14 @@ class PostsController extends App_Controller
 			}
 		}
 		if ( !empty($post) ) {
-			$this->Set('posts', $this->Post->GetByUrl($post));
+			$posts = $this->Post->GetByUrl($post);
+			$this->Set('posts', $posts);
 			$this->Set('singlepost', true);
+			$this->Set('layoutTitle', $posts[0]['Post']['header'] . ' - Innebandynyheter ');
 		} else {
 			$this->Set('posts', $this->Post->GetBySection_id($section));
 			$this->Set('singlepost', false);
+			$this->Set('layoutTitle', 'Innebandynyheter - Burås Göteborg');
 		}
 		if ( $section == 3 ) {
 			$game = new Game();

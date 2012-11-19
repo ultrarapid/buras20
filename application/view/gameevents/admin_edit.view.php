@@ -5,6 +5,7 @@
 				</div>
 <?php	endif; ?>
 				<form class="form_standard" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
+<?php /*
           <div class="div_select">
 						<label for="input_game" class="label_input">Händelse:</label>
 						<select name="gsdata[event_id]" id="input_game">
@@ -13,6 +14,17 @@
 <?php	endforeach; ?>
 						</select>	
 					</div>
+          */ ?>
+          <div class="div_select">
+            <label for="input_game" class="label_input">Match:</label>
+            <select name="gsdata[game_id]" id="input_game">
+<?php foreach ( $games as $g ) : ?>
+              <option value="<?= $g['Game']['id'] ?>"<?= ( ( $g['Game']['id'] == $game_id ) ? ' selected="selected"' : '' ) ?>><?= $g['Game']['opponent'] . ' ' . $g['Game']['gamedate'] ?></option>
+<?php endforeach; ?>
+            </select>
+          </div>
+          <input type="hidden" name="form_id" value="1" />
+          <input type="submit" value="Byt match" />         
         </form>
 <?php if ( isset($gameevents) && !empty($gameevents) ) : ?>
           <table class="game_events">
@@ -35,7 +47,7 @@
               <tr>
                 <td><?= $ge['Gameevent']['time'] ?></td>
                 <td><?= ( $ge['Gameevent']['eventtype'] == 1 ? $ourScore . ' - ' . $theirScore . ' ' : '' ) . $gameevent_types[$ge['Gameevent']['eventtype']] ?></td>
-                <td><?= $ge['Gameevent']['thisteam'] ? $thisTeam : $game['Game']['opponent'] ?>
+                <td><?= $ge['Gameevent']['thisteam'] ? $thisTeam : $game['Game']['opponent'] ?></td>
                 <td><?= $ge['Player']['firstname'] . ' ' . $ge['Player']['lastname'] ?></td>
                 <td><?= $ge['player2']['firstname'] . ' ' . $ge['player2']['lastname']?></td>
 <?php     if ( $ge['Gameevent']['eventtype'] == 1 && ( $ge['Gameevent']['ourplayers'] != 5 || $ge['Gameevent']['theirplayers'] != 5 ) ) : ?>
@@ -83,8 +95,8 @@
 <?php   foreach ( $gibf_events as $k => $e ) : ?>
               <tr>
                 <td>
-                  <span><?= $e['time'] ?></span>
-                  <input type="hidden" value="<?= '00:' . $e['time']?>" name="data[<?= $k ?>][time]" />
+                  <span><?= $e['time'] == '60:00' ? '01:00:00' : '00:' . $e['time'] ?></span>
+                  <input type="hidden" value="<?= $e['time'] == '60:00' ? '01:00:00' : '00:' . $e['time'] ?>" name="data[<?= $k ?>][time]" />
                 </td>
                 <td>	
                   <span><?= $e['eventName'] ?></span>

@@ -68,10 +68,11 @@ class Post extends App_Model
 	
 	public function GetLatestPosts($sectionID = 0, $numberOfPosts = 4)
 	{
-		$this->usefk = true;
+		$usefk = $this->usefk;
 		$conditions = $this->conditions;
 		$limit = $this->limit;
 		$order = $this->order;
+		$this->usefk = false;
 		$this->limit = array('start' => 0, 'end' => $numberOfPosts);
 		$this->order = 'DESC';
 		if ( $sectionID > 0 ) {
@@ -84,7 +85,7 @@ class Post extends App_Model
 		$this->conditions = $conditions;
 		$this->order = $order;
 		$this->limit = $limit;
-		$this->usefk = false;
+		$this->usefk = $usefk;
 		return $posts;
 	}
 	

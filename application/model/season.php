@@ -45,6 +45,18 @@ class Season extends App_Model
 		return $season;
 	}
 
+	public function GetSeasonBySeasonYears($seasonYears)
+	{
+		/* alla = 0, år = getid, '' = active */
+		$s = array('Season' => array('id' => 0));
+		if ( $seasonYears == '' ) {
+			$s = $this->GetActiveSeason();
+		} else if ( $seasonYears != 'alla' ) {
+			$s = $this->GetSeasonByYears(substr($seasonYears, 0, 4), substr($seasonYears, 5, 4));
+		}
+		return $s;
+	}
+
 	public function IsPastSeason($seasonID)
 	{
 		$controlSeason = current($this->GetById($seasonID));

@@ -3,6 +3,7 @@ class PagesController extends App_Controller
 {
 	protected $messageID = 0;
 	protected $messageText = '';
+	private   $logging = false;
 	
 	public function admin_crop() {
 		
@@ -43,6 +44,12 @@ class PagesController extends App_Controller
 			$image = new Image();
 			//print_r($_POST);
 			//print_r($_SESSION);
+			if ( $this->logging ) {
+				$logArray = array('newName' => $newName, 'tsSrcPath' => $tsSrcPath, '_newWidth' => $_newWidth, '_newHeight' => $_newHeight, 'selected_x' => $selected_x, 'selected_y' => $selected_y, 'selected_w' => $selected_w, 'selected_h' => $selected_h, 'maxWidth' => $_maxWidth, 'maxHeight' => $_maxHeight);
+
+				$cacheName = Anchors::Internal('cache') . DS . 'image' . date('Y-m-d-H-i-s');
+				file_put_contents($cacheName, serialize($logArray));
+			}
 			
 			$file = $image->ResizeThumbnailImage($newName, $tsSrcPath, $_newWidth, $_newHeight, $selected_x, $selected_y, $selected_w, $selected_h, $_maxWidth, $_maxHeight);
 	

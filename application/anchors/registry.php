@@ -8,6 +8,8 @@
 	Anchors::Register(array(
 		'admin_gameformats_edit'	=> '/admin/gameformats/edit',
 		'admin_gameformats'			=> '/admin/gameformats/index',
+		'admin_gamesetups_edit'	=> '/admin/gamesetups/edit',
+		'admin_gamesetups'			=> '/admin/gamesetups/index',
 		'admin_games_edit'			=> '/admin/games/edit',
 		'admin_players_edit'		=> '/admin/players/edit',
 		'admin_posts_del'		=> '/admin/posts/delete',

@@ -27,7 +27,7 @@ $(document).ready(function(){
 		);
 	}
 
-	if ($('form#cropform').length > 0) {
+	if ( $('form#cropform').length > 0 ) {
 		$('form#cropform :submit').before(
 			$('<input/>')
 				.attr('type', 'hidden')
@@ -46,7 +46,7 @@ $(document).ready(function(){
 				.attr('id', 'w')
 				.attr('name', 'w')
 		);
-		$('form#cropform:submit').before(
+		$('form#cropform :submit').before(
 			$('<input/>')
 				.attr('type', 'hidden')
 				.attr('id', 'h')

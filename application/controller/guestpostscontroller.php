@@ -53,6 +53,7 @@ class GuestpostsController extends App_Controller
 		$this->Guestpost->limit = array('start' => 0, 'end' => $this->paging);
 		$this->Set('amount', $this->Guestpost->CountConditional());
 		$this->Set('gbposts', $this->Guestpost->GetByVisible(1));
+		$this->Set('layoutTitle', 'Prata innebandy med Burås');
 		$this->SetContext('public', array(0 => 'more-posts'));
 	}
 	

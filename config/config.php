@@ -1,6 +1,7 @@
 <?php
 
 	date_default_timezone_set('Europe/Stockholm');
+	ini_set('default_charset', 'UTF-8');
 	//ini_set("session.gc_maxlifetime", "18000"); 	
 	define('DEVELOPMENT_ENVIRONMENT', true);
 	define('APPLICATION_FOLDER', '');
@@ -17,7 +18,9 @@
 		} else if ( file_exists(ROOT . DS . 'application' . DS . 'classes' . DS . strtolower($className) . '.php') ) {
 			require_once(ROOT . DS . 'application' . DS . 'classes' . DS . strtolower($className) . '.php');
 		} else if ( file_exists(ROOT . DS . 'application' . DS . 'services' . DS . strtolower($className) . '.php') ) {
-			require_once(ROOT . DS . 'application' . DS . 'services' . DS . strtolower($className) . '.php');			
+			require_once(ROOT . DS . 'application' . DS . 'services' . DS . strtolower($className) . '.php');	
+		}	else if ( file_exists(ROOT . DS . 'application' . DS . 'interfaces' . DS . strtolower($className) . '.php') ) {
+			require_once(ROOT . DS . 'application' . DS . 'interfaces' . DS . strtolower($className) . '.php');
 		} else {
 			/* Error Generation Code Here */
 		}

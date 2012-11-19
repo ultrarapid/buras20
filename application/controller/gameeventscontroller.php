@@ -8,6 +8,9 @@ class GameeventsController extends App_Controller
 			$this->teamSection = $game['Game']['team_id'];
 			$this->IsAllowed();
 			if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+				if ( $_POST['form_id'] == 1 ) {
+					$this->Redirect(Anchors::Refer('admin_gameevents') . '/edit/' . $_POST['gsdata']['game_id']);
+				}
 				if ( $_POST['form_id'] == 2 ) {
 					if (array_key_exists('data', $_POST)) {
 						$this->Gameevent->SaveGameeventData($gameID);
@@ -19,13 +22,15 @@ class GameeventsController extends App_Controller
 			$this->Set('gameevent_types', $this->Gameevent->gameEventTypes);
 			$this->Set('gameevent_types_flipped', array_flip($this->Gameevent->gameEventTypes));
 			$this->Set('thisTeam', $this->Gameevent->Game->thisTeam);
-			$gibfService  = new GibfService();
-			$this->Set('penaltyCodes', $gibfService->GetPenaltyCodes());
+			$statProxy = new StatsServiceProxy();
+			$this->Set('penaltyCodes', $statProxy->GetPenaltyCodes());
 			$codes = array_flip($this->Gameevent->gameEventTypes);
+			$this->Gameevent->Game->conditions = array(0 => array('field' => 'season_id', 'value' => $game['Game']['season_id']), 1 => array('field' => 'team_id', 'value' => $game['Game']['team_id']), 2 => array('field' => 'gameformat_id', 'value' => 1));			
+			$this->Set('games', $this->Gameevent->Game->GetAll());
+			$this->Set('game_id', $gameID);
 			if ( $getIbf > 0 ) {
-				$gibfService = new GibfService();
 				if ( !empty($game['Game']['ibfid']) ) {
-					$this->Set('gibf_events', $gibfService->GetGameEventsByGameId($game['Game']['ibfid']));
+					$this->Set('gibf_events', $statProxy->GetGameEventsByGameId($game['Game']['ibfid']));
 				}
 			}	
 		}

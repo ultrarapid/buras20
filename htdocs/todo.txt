@@ -1,4 +1,10 @@
 
+
+hantera -1 från gibf.
+möjlighet att kunna ändra matchhändelser.
+möjlighet att lägga in säsongens tabellurl, göras automatiskt?
+sparningsfix när man skriver nyheter och referat som sparar undan backup ifall man skulle bli utslängd?
+
   
 	uppdatera:
 	js-mappen

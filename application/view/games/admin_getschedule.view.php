@@ -47,6 +47,9 @@
           <input type="hidden" name="data[<?= $k ?>][location]" value="<?= $g['location'] ?>" /> 
           <input type="hidden" name="data[<?= $k ?>][ourscore]" value="<?= $g['ourscore'] ?>" />
           <input type="hidden" name="data[<?= $k ?>][theirscore]" value="<?= $g['theirscore'] ?>" />
+<?php     if ( !is_numeric($g['theirscore']) && !is_numeric($g['ourscore']) ) : ?>
+          <input type="hidden" name="data[<?= $k ?>][publish]" value="1" />
+<?php     endif; ?>
           <input type="hidden" name="data[<?= $k ?>][ibfid]" value="<?= $g['ibfid'] ?>" />
           <input type="hidden" name="data[<?= $k ?>][slug]" value="<?= ( ( $g['homegame'] == 1 ) ? Formatter::CreateSlug($thisTeam) . '---' . Formatter::CreateSlug($g['opponent']) : Formatter::CreateSlug($g['opponent']) . '---' . Formatter::CreateSlug($thisTeam) ) . '-' . ( ( substr($g['gamedate'], 8, 1) == '0' ) ? substr($g['gamedate'], 9, 1) : substr($g['gamedate'], 8, 2) ) . '-' . Formatter::GetMonthName(substr($g['gamedate'], 5, 2)) . '-' . substr($g['gamedate'], 0, 4) ?>" />                                   
         </td>       

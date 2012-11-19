@@ -27,9 +27,9 @@ jQuery(document).ready(function($) {
       _data[i] = parseInt(_data[i], 10);
       ctx.fillStyle = _colors[i];
       ctx.beginPath();
-      ctx.moveTo(200,150);
-      ctx.arc(200,150,150,lastend,lastend+(Math.PI*2*(_data[i]/myTotal)),false);
-      ctx.lineTo(200,150);
+      ctx.moveTo(160,120);
+      ctx.arc(160,120,120,lastend,lastend+(Math.PI*2*(_data[i]/myTotal)),false);
+      ctx.lineTo(160,120);
       ctx.fill();
       lastend += Math.PI*2*(_data[i]/myTotal);
     }

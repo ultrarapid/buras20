@@ -34,6 +34,7 @@ class Seasonteamtable extends App_Model
 			$seasonID = $season['Season']['id'];
 		}		
     return $this->GetCachedTable($seasonID, $teamID);
+    //return $this->GetUnCachedTable($seasonID, $teamID);
 	}
 	
 	public function GetTableBySeasonTeam($seasonID, $teamID)
@@ -41,6 +42,22 @@ class Seasonteamtable extends App_Model
 		$conditions = $this->conditions;
 		$this->conditions = array(0 => array('field' => 'season_id', 'value' => $seasonID), 
 															1 => array('field' => 'team_id', 'value' => $teamID));
+		$seasonTeamTable = current($this->Get());
+		$this->conditions = $conditions;
+		return $seasonTeamTable;		
+	}
+
+	public function GetTableSettings($teamID, $seasonID)
+	{
+		
+	}
+
+	public function Get22TableBySeasonTeam($seasonID, $teamID)
+	{
+		$conditions = $this->conditions;
+		$this->conditions = array(0 => array('field' => 'season_id', 'value' => $seasonID), 
+															1 => array('field' => 'team_id', 'value' => $teamID));
+		$this->displayQuery = true;
 		$seasonTeamTable = current($this->Get());
 		$this->conditions = $conditions;
 		return $seasonTeamTable;		
@@ -72,9 +89,8 @@ class Seasonteamtable extends App_Model
 		$seasonTeamTable = $this->GetTableBySeasonTeam($seasonID, $teamID);
 		$tableUrl = $seasonTeamTable['Seasonteamtable']['url'];
 
-		$gibfService = new GibfService();
-		$tableArray = $gibfService->GetTable($tableUrl);
-
-		return $tableArray;		
+		$statProxy = new StatsServiceProxy();
+		$tableArray = $statProxy->GetTable($tableUrl);
+		return $tableArray;
 	}
 }

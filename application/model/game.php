@@ -10,7 +10,7 @@ class Game extends App_Model
 	{
 		parent::__construct($bound);
 		$this->ordercol = 'gamedate';
-		$this->order 	= 'DESC';
+		$this->order 	= 'ASC';
 		$this->usefk 	= false;
 		$this->table	= 'bik_games';
 	}
@@ -81,10 +81,10 @@ class Game extends App_Model
 		$order = $this->order;		
 		$this->limit = array('start' => 0, 'end' => 1);
 		$this->order = 'ASC';
-		$date = date('Y-m-d H:i:s');
-		$oneDayAgo = strtotime('-1 day', strtotime($date));
+		$date = date('Y-m-d');
+		$today = strtotime($date);
 		$this->conditions = array(0 => array('field' => 'team_id', 'value' => $teamID), 
-															1 => array('field' => 'gamedate', 'separator' => '>', 'value' => "'" . date('Y-m-d H:i:s', $oneDayAgo) . "'"));
+															1 => array('field' => 'gamedate', 'separator' => '>', 'value' => "'" . date('Y-m-d', $today) . "'"));
 		$game = current($this->Get());
 		$this->conditions = $conditions;
 		$this->order = $order;
@@ -94,18 +94,21 @@ class Game extends App_Model
 	
 	public function GetPreviousGame($teamID)
 	{
+		$usefk = $this->usefk;
 		$conditions = $this->conditions;
 		$limit = $this->limit;
 		$order = $this->order;
 		$this->limit = array('start' => 0, 'end' => 1);
-		$date = date('Y-m-d H:i:s');
-		$oneDayAgo = strtotime('-1 day', strtotime($date));
+		$date = date('Y-m-d');
+		$today = strtotime($date);
+		$this->usefk = true;
 		$this->conditions = array(0 => array('field' => 'team_id', 'value' => $teamID), 
-															1 => array('field' => 'gamedate', 'separator' => '<', 'value' => "'" . date('Y-m-d H:i:s', $oneDayAgo) . "'"));
+															1 => array('field' => 'gamedate', 'separator' => '<', 'value' => "'" . date('Y-m-d', $today) . "'"));
 		$game = current($this->Get());
 		$this->conditions = $conditions;
 		$this->order = $order;
-		$this->limit = $limit;		
+		$this->limit = $limit;
+		$this->usefk = $usefk;	
 		return $game;
 	}
 
@@ -124,7 +127,10 @@ class Game extends App_Model
 		$seasonID 	= $season == 'alla' ? 0 : $season['Season']['id'];
 
 		$gameFormat = $gameType != 'alla' ? current($this->Gameformat->GetBySlug($gameType)) : 0;
+
 		$gformatID 	= !$gameFormat ? 0 : $gameFormat['Gameformat']['id'];
+
+		//print_r($gformatID);
 
 		$this->conditions = array(0 => array('stmt' => $this->table . '.team_id = ? AND (' . $this->table . '.season_id = ? Or 0 = ?) AND (' . $this->table . '.gameformat_id = ? OR 0 = ?)'));
 
@@ -138,19 +144,48 @@ class Game extends App_Model
 		$this->conditionFunction 	= $conditionFunc;
 		return $games;
 	}
+
+	public function GetSeasonGamesByTeamIdSeasonIdGameType($teamID, $seasonID, $gameType = 'alla')
+	{
+		$usefk 										= $this->usefk;
+		$this->usefk 							= true;
+		$recursive 								= $this->recursive;
+		$this->recursive 					= true;
+		$conditionFunc						= $this->conditionFunction;
+		$this->conditionFunction 	= true;
+		
+		$gameFormat = $gameType != 'alla' ? current($this->Gameformat->GetBySlug($gameType)) : 0;
+
+		$gformatID 	= !$gameFormat ? 0 : $gameFormat['Gameformat']['id'];
+
+		//print_r($gformatID);
+
+		$this->conditions = array(0 => array('stmt' => $this->table . '.team_id = ? AND (' . $this->table . '.season_id = ? Or 0 = ?) AND (' . $this->table . '.gameformat_id = ? OR 0 = ?)'));
+
+		//$this->displayQuery = true;
+		$values 									= array($teamID, $seasonID, $seasonID, $gformatID, $gformatID);
+		//print_r($values);
+		$games 										= $this->GetWithValues($values);
+
+		$this->usefk 							= $usefk;
+		$this->recursive 					= $recursive;
+		$this->conditionFunction 	= $conditionFunc;
+		return $games;
+	}
+
 	
 	public function GetStatsBySeasonTeam($seasonID, $teamID)
 	{
 		$stmt = 'SELECT 
 							(SELECT COUNT(g.id) FROM bik_games as g
 								WHERE g.ourscore > g.theirscore
-								AND season_id = ? AND team_id = ?) as Game_win, 
+								AND season_id = ? AND team_id = ? AND publish = 1 AND gameformat_id = 1) as Game_win, 
 							(SELECT COUNT(g.id) FROM bik_games as g
 								WHERE g.ourscore = g.theirscore
-								AND season_id = ? AND team_id = ?) as Game_draw, 
+								AND season_id = ? AND team_id = ? AND publish = 1 AND gameformat_id = 1) as Game_draw, 
 							(SELECT COUNT(g.id) FROM bik_games as g
 								WHERE g.ourscore < g.theirscore
-								AND season_id = ? AND team_id = ?) as Game_loss';
+								AND season_id = ? AND team_id = ? AND publish = 1 AND gameformat_id = 1) as Game_loss';
 		$values = array($seasonID, $teamID, $seasonID, $teamID, $seasonID, $teamID);
 		return $this->GetResult($stmt, $values);
 	}

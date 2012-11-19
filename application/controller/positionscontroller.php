@@ -1,6 +1,9 @@
 <?php
 class PositionsController extends App_Controller
 {
+
+	protected $dbTextFields = array('name');
+	
 	public function admin_delete($id)
 	{
 		$object = current($this->Position->GetById($id));

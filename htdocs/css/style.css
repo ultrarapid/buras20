@@ -23,7 +23,7 @@ body {
 .jsActive body { visibility: hidden; }
 
 .wrapper {
-	padding: 10px 9% 20px 9%;
+	padding: 10px 0 20px 8%;
 }
 
 @media all and (max-width : 1010px) {
@@ -46,7 +46,7 @@ body {
 	font-family: Arimo, Arial, Helvetica, sans-serif;
 	margin: 0 0 0 14px;
 	padding: 105px 28px 0 5px;
-	text-transform: uppercase;	
+	text-transform: uppercase;
 	text-decoration: none;
 }
 
@@ -99,17 +99,18 @@ body {
 	text-decoration: none;
 	text-transform: uppercase;
 }
-
+/*
 .main-nav li .active {
-
+	background-color: #03542e;
+	color: #fff;
 }
-
+*/
 
 .section-header, .main-nav {
 	zoom: 1\9; /* IE8 and below clearfix */ 
 }
 
-.main-nav:after, .section-header:after {
+.main-nav:after, .section-header:after, .stats-wrapper:after {
     content: ".";
     display: block;
     height: 0;
@@ -133,7 +134,7 @@ body {
 	text-transform: uppercase;
 }
 
-.nav li a:hover, .nav li a.active, .season-nav li a.active {
+.nav li a:hover, .nav li a.active, .season-nav li a.active, .season-nav li a:hover, .gameformat-nav li a.active, .gameformat-nav li a:hover {
 	background-color: #03542e;
 	color: #fff;
 }
@@ -152,6 +153,10 @@ body {
 	background: #e5e5e5;
 }
 
+.page .page-compact {
+	max-width: 550px;
+}
+
 .page-wrap {
 
 }
@@ -161,6 +166,12 @@ body {
 	font-family: Arimo, Arial, Helvetica, sans-serif; font-weight: bold; font-size: 1.2em;
 	margin: 0 0 14px;
 	text-transform: uppercase;
+}
+
+.page .default-image {
+	background-color: white;
+  border: 1px solid #ccc;
+  padding: 6px;
 }
 
 .extras {
@@ -181,8 +192,8 @@ body {
 .extras article {
 	float: left;
 	font-size: 0.8em;
-	margin-right: 30px;
-	width: 220px;
+	margin-right: 10px;
+	width: 260px;
 }
 
 .extras h3 {
@@ -193,6 +204,44 @@ body {
 .extras time {
 	text-transform: capitalize;
 }
+
+
+/*      home start      */
+
+.latest-wrapper {
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+}
+
+.latest-news {
+	margin-bottom: 20px;
+	max-width: 220px;
+}
+
+.latest-news a:hover {
+	background-color: #ccc;
+}
+
+.latest-wrapper h3 {
+	color: #bbb;
+	text-transform: uppercase;
+}
+
+.latest-wrapper h3 a {
+	color: #555;
+	font-size: 0.9em; font-weight: bold;
+	padding: 5px 8px 5px 0;
+	text-decoration: none;
+}
+
+.latest-wrapper time {
+	color: #999;
+	font-size: 0.8em;
+}
+
+/*      home end        */
+
+
+
 
 
 /* slider start */
@@ -300,17 +349,45 @@ section.calendar time.sunday a {
 /*  news posts start  */
 
 article.status {
-	margin: 2px 0 20px;
+	margin: 10px 0 90px;
 }
 
 article.status div.status-body {
-	padding: 10px 10px 10px 0;
+	line-height: 1.6em;
 	max-width: 40em;
+	padding: 10px 10px 10px 0;
+}
+
+article.status div.status-body img {
+	background-color: white;
+	border: 1px solid #ccc;
+	padding: 6px;
+}
+
+article.status div.status-body img.small {
+	height: 100%; max-width: 100px;
+}
+
+article.status div.status-body img.medium {
+	height: 100%; max-width: 200px;
+}
+
+article.status div.status-body img.large {
+	height: 100%; max-width: 400px;
 }
 
 article.status header h3 {
 	color: #444;
 	font-family: Arimo, Arial, Helvetica, Tahoma; font-weight: bold; font-size: 2.0em; font-weight: bold;
+}
+
+article.status header h3 a {
+	color: #444;
+	text-decoration: none;
+}
+
+article.status header h3 a:hover {
+	background-color: #ccc;
 }
 
 article.status time {
@@ -330,17 +407,37 @@ article.status time span.at-character {
 
 /* team statistics */
 
-.graph {
-	margin: 0 20px 0 0;
+.stats-wrapper {
+	margin: 0 0 20px 0;
+}
+
+.table-stats-wrapper, .player-stats-wrapper, .powerplay-stats-wrapper {
+	float: left;
+	margin: 0 2%;
+}
+
+.table-stats-wrapper {
 	width: 400px;
 }
 
+.player-stats-wrapper {
+	width: 280px;
+}
+
+.powerplay-stats-wrapper {
+	width: 105px;
+}
+
+.graph {
+	margin: 30px 0 0;
+}
+
 .graph canvas {
-	float: left;
+	padding: 0;
 }
 
 .series-statistics {
-	margin: 0 20px 0 0;
+	margin: 0 20px 30px 0;
 }
 
 .series-statistics ul {
@@ -348,40 +445,134 @@ article.status time span.at-character {
 }
 
 .series-statistics ul li {
-	float: left;
-	margin: 8px 0 8px 20px;
+	display: inline-block;
+	margin: 8px 6px 0;
 }
 
-.series-statistics ul li span{
+.series-statistics ul li span {
 	border: 1px solid #666;
 	border-radius: 2px;
 	display: inline-block;
-	margin: 15px 12px 0 0;
+	margin: 15px 6px 0 0;
 	height: 22px; width: 22px;
 	vertical-align: -6px;
 }
 
+table.table-short td {
+	color: #222;
+	padding: 5px 10px 0 0;
+	text-align: right;
+}
+
+table.table-short td.span-team {
+	width: 120px;
+	overflow: hidden;
+	text-align: left;
+	white-space: nowrap;
+}
+
+table.table-short tr.table-thisteam td {
+	font-size: 1.5em;
+	padding: 5px 8px 0 0;
+	white-space: nowrap;
+}
+
+section.table-summary {
+/*	margin-left: 440px;*/
+}
+
+section.table-summary h3, section.top-list h3, .powerplay-stats-wrapper h3 {
+	color: #666;
+	font-family: Arimo, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	margin: 0 0 6px 0;
+	text-transform: uppercase;
+}
+
+section.top-list {
+	margin: 0 0 30px;
+}
+
+section.top-list table tr td:first-child {
+	padding-left: 8px; padding-right: 10px;
+}
+
+section.top-list table tr td:nth-child(2) {
+	width: 180px;
+}
+
+section.top-list table tr td:last-child {
+	padding-left: 8px;
+}
+
+section.top-list table td {
+	padding: 5px 0 0;
+}
+
+section.top-penalty table td {
+	vertical-align: top;
+}
+
+section.top-penalty table td span {
+	color: #333;
+	display: block;
+	font-size: 0.7em;
+}
+
+.powerplay-stats-wrapper section {
+	margin: 0 0 30px;
+}
+
+.uneven-percent {
+	color: #444;
+	font-size: 3.3em;
+	text-align: right;
+}
+
+.uneven-count {
+	color: #666;
+	font-size: 0.9em;
+	text-align: right;
+}
+
+.uneven-goals {
+	color: #666;
+	font-size: 0.9em;
+	text-align: right;	
+}
+
+
 @media all and (min-width : 961px) {
 
-	nav.season-nav {
-		position: absolute; top: 210px;
+	.history-nav {
+		position: absolute;
+		top: 252px;
 	}
 
-	nav.season-nav ul {
-		position: absolute;	left: -80px;
+	.gameformat-nav, .season-nav {
+		margin-left: -210px;
+	}
+
+	nav.season-nav ul li, .gameformat-nav ul li {
+		text-align: right;
 	}
 
 }
 
-nav.season-nav ul li {
+.season-nav {
+	margin-bottom: 2em;
+}
+
+nav.season-nav ul li, .gameformat-nav ul li {
 	color:#333;
 	border:0px solid red;
-	font-family: Arimo, Arial, Helvetica, sans-serif;	
+	font-family: Arimo, Arial, Helvetica, sans-serif;
 	font-size: 1.4em;
 	font-weight: bold;
+	width: 8em;
 }
 
-nav.season-nav ul li a {
+nav.season-nav ul li a, .gameformat-nav ul li a {
 	color: #bbb;
 	padding: 1px 3px;
 	text-decoration: none;
@@ -448,7 +639,7 @@ div.div-gbpost p.name {
 }
 
 div.div-gbposts {
-	margin: 50px 300px 0 0;
+	margin: 50px 0 0 0;
 	max-width: 700px;
 }
 
@@ -521,6 +712,77 @@ table.game-status td {
 	padding: 8px 34px 8px 0;
 }
 
+.game-details-scoreboard {
+  color: #444444;
+  font-family: Arimo, Arial, Helvetica, Tahoma;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0.5em 0;
+}
+
+.game-details-result {
+	padding-left: 1em;
+}
+
+.game-details-postgame {
+	line-height: 1.75em;
+	max-width: 55em;
+}
+
+
+.game-events {
+	font-family: Arimo, Arial, Helvetica, Sans-serif;
+	margin: 50px 0 0;
+}
+.game-events .game-events-header h3 {
+	color: #444;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.game-events .game-events-header-row {
+	margin: 10px 0 0;
+}
+
+.game-events .game-events-header-row span {
+	color: #666;
+	font-size: 0.8em;
+}
+
+.game-events-row {
+	color: #333;
+	font-size: 0.8em;
+	margin: 10px 0 0;
+}
+
+.game-events table tbody td {
+
+}
+
+section.game-events span{
+	display: inline-block;
+}
+
+section.game-events span:first-child {
+	width: 65px;
+}
+
+section.game-events span:nth-child(2) {
+	width: 100px;
+}
+
+section.game-events span:nth-child(3) {
+	overflow: hidden;
+	width: 300px;
+}
+
+section.game-events span:nth-child(4) {
+	width: 200px;
+}
+
+section.game-events span:nth-child(5) {
+	width: 200px;
+}
 
 /*  table  */
 

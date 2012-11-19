@@ -28,6 +28,20 @@ class Formatter
 	}
 
 	/**
+	* Changes format YYYY-MM-DD to day (without leading zeroes), monthname (in swedish), year.
+	*
+	* @param  string $string Date in textformat YYYY-MM-DD
+	* @return string day-monthname-year
+	*/
+	public static function CreateDateSlug($gamedate)
+	{
+		$year  = substr($gamedate, 0, 4);
+		$month = self::GetMonthName(substr($gamedate, 5, 2));
+		$day   = ltrim(substr($gamedate, 8, 2), '0');
+		return $day . '-' . $month . '-' . $year;
+	}
+
+	/**
 	* Removes all chars but a-z and 0-9. Returns as lowercase.
 	* Spaces is switched to -
 	*

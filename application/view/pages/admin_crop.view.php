@@ -1,4 +1,4 @@
-<img id="<?= $cropDir ?>" class="<?= $cropClass ?>" src="<?= $imgSrc ?>" alt="" />			
+<img id="<?= $cropDir ?>" class="<?= $cropClass ?>" src="<?= $imgSrc ?>" alt="" />		
 				<form id="cropform" class="standard" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
 					<input type="hidden" name="side" id="thumb_side" value="<?= $side ?>" />
 					<input type="hidden" id="src_h" value="<?= $height ?>" />

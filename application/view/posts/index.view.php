@@ -5,7 +5,7 @@
 <?php endif; ?>
 <?php	if ( isset($section['Section']['body']) ) : ?>
             <div class="page-body">
-<?= Formatter::ConvertLinebreaksToBr(Formatter::ConvertLocalLinks($section['Section']['body'])) ?>
+<?= Formatter::ObfuscateEmails(Formatter::ConvertLocalLinks($section['Section']['body'])) ?>
 
             </div>
 <?php	endif; ?>
@@ -13,7 +13,15 @@
 <?php   foreach ( $posts as $post ) : ?>
             <article class="status">
               <header>
-                <h3 class="status-header"><span class="status-header-inline"><?= $post['Post']['header'] ?></span></h3>
+                <h3 class="status-header">
+<?php     if ( !$singlepost ) : ?>
+                  <a href="<?= Anchors::Refer('base') . '/' . $section['Section']['url'] . '/' . substr($post['Post']['created'], 0, 4) . '/' . Formatter::GetMonthName(substr($post['Post']['created'], 5, 2)) . '/' . $post['Post']['url'] ?>.html">
+<?php     endif; ?>                    
+                    <span class="status-header-inline"><?= $post['Post']['header'] ?></span>
+<?php     if ( !$singlepost ) : ?>
+                  </a>
+<?php     endif; ?>
+                </h3>
               </header>
               <section class="status-left">
 <?php      if ( $section['Section']['comment_enabled'] == 1 && !$singlepost ) : ?>

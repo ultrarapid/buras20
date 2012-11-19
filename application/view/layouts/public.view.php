@@ -1,15 +1,17 @@
 <!doctype html>
 <html>
   <head>
-    <title>Burås Innebandy - Göteborg</title>
     <meta charset="utf-8" />
+    <title><?= isset($layoutTitle) ? $layoutTitle : 'Burås Innebandy - Göteborg' ?></title>
+    <link rel="stylesheet" type="text/css" href="<?= Anchors::Refer('stylesheet_folder') ?>/style.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Arimo:400,700,900|Droid+Serif:400,700,700italic,400italic" />
+    <link rel="shortcut icon" href="<?= Anchors::Refer('base') ?>/favicon.ico" />
+    <link rel="apple-touch-icon" href="<?= Anchors::Refer('base') ?>/phone-small.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="<?= Anchors::Refer('base') ?>/phone-large.png" />
     <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') ?>/public-preloader.js"></script>
     <!--[if lt IE 9]>
       <script src="<?= Anchors::Refer('javascript_folder') ?>/html5-js/dist/html5shiv.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="<?= Anchors::Refer('base') ?>/favicon.ico" />    
-    <link type="text/css" href="//fonts.googleapis.com/css?family=Arimo:400,700,900|Droid+Serif:400,700,700italic,400italic" rel="stylesheet"  />    
-    <link type="text/css" href="<?= Anchors::Refer('stylesheet_folder') ?>/style.css" rel="stylesheet" />	
+    <![endif]-->    
   </head>
   <body>
     <div class="section-login">
@@ -49,7 +51,7 @@
             </article>
             <article class="next-event">
               <header>
-                <h3>Utanf&ouml;r planen</h3>
+                <h3>Utanför planen</h3>
               </header>
 <?php if ( $nextEvent ) : ?>
               <p><?= $nextEvent['Event']['header'] ?></p>
@@ -94,8 +96,7 @@
           <h2 class="page-header"><?= $section['Section']['header'] ?></h2>
         </div>
 <?php endif; ?>
-        <div class="outer-content">
-          
+        <div class="outer-content">          
 <?= $layoutContent ?>
         </div>
       </div>    
@@ -108,6 +109,7 @@
           endforeach; ?> />
 <?php   endforeach; ?>
 <?php endif; ?>
+    <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') . '/jquery-1.7.1.min' ?>.js"></script>
 <?php	if ( isset($layoutJavascripts) ) : ?>
 <?php		foreach	( $layoutJavascripts as $js ) : ?>
     <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') . '/' . $js ?>.js"></script>
@@ -124,6 +126,15 @@
       })();
     </script>
     <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') ?>/public-postloader.js"></script>
+<?php if ( isset($toConsole) ) : ?>
+    <script type="text/javascript">
+<?php   if ( is_array($toConsole) ) : ?>
+      console.log('<?php echo json_encode($toConsole); ?>');
+<?php   else : ?>
+      console.log('<?= $toConsole ?>');
+<?php   endif; ?>
+    </script>
+<?php endif; ?>
     <form action="<?= $_SERVER['REQUEST_URI'] ?>">
       <input type="hidden" value="<?= Anchors::Refer('base') ?>" id="base" />
     </form>

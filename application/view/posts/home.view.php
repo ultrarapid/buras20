@@ -3,6 +3,40 @@
 <?php else: ?>
           <div id="div-section-<?= $section['Section']['id'] ?>" class="page-content-full">
 <?php endif; ?>
+            <section class="latest-wrapper">
+<?php foreach ( $latestPosts as $p ) : ?>
+              <article class="latest-news">
+                <header>
+                  <h3>
+                    <a href="<?= Anchors::Refer('base') . '/nyheter/' . substr($p['Post']['created'], 0, 4) . '/' . Formatter::GetMonthName(substr($p['Post']['created'], 5, 2)) . '/' . $p['Post']['url'] ?>.html"><?= $p['Post']['header'] ?></a>
+                  </h3>
+                </header>
+                <time datetime="<?= substr($p['Post']['created'], 0, 16) ?>">@ <?= Formatter::ReadableDateWithDay($p['Post']['created']) . ' ' . substr($p['Post']['created'], 11, 5) ?>
+                </time>
+              </article>
+<?php endforeach; ?>
+              <article class="previous-mens-game previous-game">
+                <header>
+                  <h3>Senaste herrmatch</h3>
+                  <?= ''//print_r($previousMensGame) ?>
+                </header>
+                <p><?= ( $previousMensGame['Game']['homegame'] ? 'Hemma' : 'Borta' ) . ' mot: ' . $previousMensGame['Game']['opponent'] ?></p>
+                <time datetime="<?= substr($previousMensGame['Game']['gamedate'], 0, 16) ?>"><?= Formatter::ReadableDateWithDay($previousMensGame['Game']['gamedate']) . ' ' . substr($previousMensGame['Game']['gamedate'], 11, 5) ?></time>
+                <p><a href="<?= Anchors::Refer('base') . '/' . 'herr/matcher/' . substr($previousMensGame['Season']['startdate'], 0, 4)  . '-' . substr($previousMensGame['Season']['enddate'], 0, 4) . '/' . $previousMensGame['Gameformat']['slug'] . '/' . $previousMensGame['Game']['slug'] . '.html' ?>">@ <?= $previousMensGame['Game']['location'] ?></a></p>
+              </article>
+              <article class="previous-womens-game previous-game">
+                <header>
+                  <h3>Senaste dammatch</h3>
+                </header>
+                <p><?= ( $previousWomensGame['Game']['homegame'] ? 'Hemma' : 'Borta' ) . ' mot: ' . $previousWomensGame['Game']['opponent'] ?></p>
+                <time datetime="<?= substr($previousWomensGame['Game']['gamedate'], 0, 16) ?>"><?= Formatter::ReadableDateWithDay($previousWomensGame['Game']['gamedate']) . ' ' . substr($previousWomensGame['Game']['gamedate'], 11, 5) ?></time>
+                <p><a href="<?= Anchors::Refer('base') . '/' . 'dam/matcher/' . substr($previousWomensGame['Season']['startdate'], 0, 4)  . '-' . substr($previousWomensGame['Season']['enddate'], 0, 4) . '/' . $previousWomensGame['Gameformat']['slug'] . '/' . $previousWomensGame['Game']['slug'] . '.html' ?>">@ <?= $previousWomensGame['Game']['location'] ?></a></p>
+              </article>
+              <article class="latest-news">
+              </article>
+              <article class="latest-news">
+              </article>
+            </section>
             <div class="slider-wrapper theme-default">
               <div id="slider" class="nivoSlider">
                 <img src="/img/nivo/slide1.jpg" alt="" />

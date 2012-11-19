@@ -1,6 +1,9 @@
 <?php
 class GameformatsController extends App_Controller
-{	
+{
+
+	protected $dbTextFields = array('name');
+
 	public function admin_edit($id = 0)
 	{
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {

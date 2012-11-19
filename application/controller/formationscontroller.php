@@ -1,6 +1,9 @@
 <?php
 class FormationsController extends App_Controller
-{	
+{
+
+	protected $dbTextFields = array('name');
+
 	public function admin_delete($id)
 	{
 		$object = current($this->Formation->GetById($id));

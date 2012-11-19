@@ -12,11 +12,9 @@ $(function() {
       if ( data.response ) {
         $('div#guestbook-posts').append(data.posts);
         $('#last_id').val(data.lastId);
-        if ( data.count < data.paging ) {
-          UnsetMoreButton();
-        } else if ( !data.response ) {
-          UnsetMoreButton();
-        }
+      }
+      if ( !data.response || data.count < data.paging ) {
+        UnsetMoreButton(); 
       }
     });
   };

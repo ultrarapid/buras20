@@ -308,7 +308,11 @@ class PlayersController extends App_Controller
 					$this->messageText = "Korrupt bildfil. ";
 					$this->messageID = 2;
 				} else {
+					//$imgWithExt = substr($returnval, strripos($returnval,'/')+1);
 					$imgWithExt = substr($returnval, strripos($returnval,'/')+1);
+					if ( strripos($returnval, '\\') && strripos($returnval, '\\') > strripos($returnval, '/') ) {
+						$imgWithExt = substr($returnval, strripos($returnval, '\\') + 1);
+					}
 					//$imgName = substr($returnval, strripos($returnval,'/')+1);
 					$imgName = substr($imgWithExt, 0, strripos($imgWithExt, '.'));
 					
@@ -348,7 +352,13 @@ class PlayersController extends App_Controller
 		if ( isset($_SESSION['filename']) ) {
 			if ( !empty($_SESSION['filename']) ) {
 				//$image['src'] = substr(substr($_SESSION['filename'], strripos($_SESSION['filename'], '/')+1), 0, stripos(substr($_SESSION['filename'], strripos($_SESSION['filename'], '/')+1), '.'));
-				$file = substr(substr($_SESSION['filename'], strripos($_SESSION['filename'], '/')+1), 0, stripos(substr($_SESSION['filename'], strripos($_SESSION['filename'], '/')+1), '.'));
+				$imgName = substr($_SESSION['filename'], strripos($_SESSION['filename'],'/')+1);
+				if ( strripos($_SESSION['filename'], '\\') && strripos($_SESSION['filename'], '\\') > strripos($_SESSION['filename'], '/') ) {
+					$imgName = substr($_SESSION['filename'], strripos($_SESSION['filename'], '\\') + 1);
+				}
+
+
+				$file = substr($imgName, 0, stripos($imgName, '.'));
 				$player['imgsrc'] = substr($file, 0, strripos($file, '_tn'));
 				$player['id'] = $id;
 				if ( $this->Player->Save($player) ) {

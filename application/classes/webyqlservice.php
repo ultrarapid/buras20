@@ -1,15 +1,9 @@
 <?php
-class GibfService {
-	
+class WebYqlService extends StatsService
+{	
 	private $team = 'Burås IK'; // team to look for on gibf
 	private $tableClass = 'tableList'; // class of table on gibf (if structure on gibf changes, the query and nodevalues will have to be redone)
 	private $yqlUrl = "http://query.yahooapis.com/v1/public/yql?q="; // yahoo query language service url
-	
-	/*
-	params:
-	$url = url of full schedule on gibf
-	$season (optional) = season array, restricting retrieved data. Only is displayed if between dates	
-	*/
 	
 	public function GetGameEventsByGameId($gameID)
 	{
@@ -24,50 +18,8 @@ class GibfService {
 	public function GetPlayersByGameId($gameID)
 	{
 		return $this->GetGamePlayers('http://www.innebandy.se/Templates/IDA/MatchLineup.aspx?PageId=106388&MatchID=' . $gameID . '&epslanguage=SV');
+	}
 
-	}
-	
-	public function GetPenaltyCodes()
-	{
-		return array(
-			201 => 'Slag', 
-			202 => 'Låsning av klubba', 
-			203 => 'Lyftning av klubba', 
-			204 => 'Otillåten spark', 
-			205 => 'Hög spark', 
-			206 => 'Hög klubba', 
-			207 => 'Otillåten trängning', 
-			208 => 'Hårt spel 2 min', 
-			209 => 'Fasthållning', 
-			210 => 'Obstruktion', 
-			211 => 'Felaktigt avstånd', 
-			212 => 'Liggande spel', 
-			213 => 'Hands', 
-			214 => 'Nick', 
-			215 => 'Felaktigt byte', 
-			216 => 'För många spelare på plan', 
-			217 => 'Upprepade förseelser', 
-			218 => 'Fördröjande av spelet', 
-			219 => 'Protest mot domslut', 
-			220 => 'Felaktigt beträdande av spelplanen', 
-			221 => 'Felaktig utrustning', 
-			222 => 'Mätning av klubba', 
-			223 => 'Felaktig numrering', 
-			224 => 'Spel utan klubba', 
-			225 => 'Ej avlägsnat avslagna klubbdelar', 
-			226 => 'Straff pga hopp', 
-			227 => 'Straff pga betr av målvaktsområde', 
-			501 => 'Våldsamt slag', 
-			502 => 'Farligt spel', 
-			503 => 'Hakning', 
-			504 => 'Hårt spel, 5 min', 
-			505 => 'Upprepade förseelser', 
-			101 => 'Osportsligt uppträdande', 
-			301 => 'Matchstraff 1', 
-			302 => 'Matchstraff 2', 
-			303 => 'Matchstraff 3');
-	}
-	
 	public function GetScheduleInSeason($url, $season = array())
 	{
 

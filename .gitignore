@@ -4,3 +4,12 @@ config/connection.php
 #images
 htdocs/img
 htdocs/bilder
+
+#backups
+backup
+
+#conn
+sftp-config.json
+
+#temporary files
+tmp/**/*

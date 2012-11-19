@@ -182,7 +182,7 @@ class App_Controller extends Controller
 		$this->Set('messageText', $this->messageText);			
 		$this->Set('messageType', $this->messageType);			
 		$this->Set('layout', $context);
-		$javascripts = array(0 => 'jquery.min');
+		$javascripts = array();
 		if ( !empty($addedJavascripts) ) {			
 			foreach ( $addedJavascripts as $js ) {
 				$javascripts[] = $js;

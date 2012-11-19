@@ -6,7 +6,7 @@
         <form id="form_game" class="form_standard" action="<?= $_SERVER['REQUEST_URI'] ?>" method="post">
           <div class="div_form_section div_form_section_one">
             <div class="div_input">
-              <label class="label_input" for="input_game_opponent"><span>Motst&aring;ndare:</span></label>
+              <label class="label_input" for="input_game_opponent"><span>Motståndare:</span></label>
               <input name="data[opponent]" type="text" id="input_game_opponent" value="" />
             </div>
             <div class="div_radio">
@@ -104,12 +104,12 @@
                 <option value="<?= $gf['Gameformat']['id']  ?>"<?php echo ( ( $gf['Gameformat']['id'] == $defaultFormat ) ? ' selected="selected"' : '' ) ?>><?= $gf['Gameformat']['name'] . '  [ ' . $gf['Gameformat']['periods'] . 'x' . $gf['Gameformat']['periodtime'] . ' ]' ?></option>
 <?php	endforeach; ?>
               </select>
-            </div>
+            </div>           
             <div class="div_select">
-              <label class="label_select" for="input_season"><span>S&auml;song:</span></label>
+              <label class="label_select" for="input_season"><span>Säsong:</span></label>
               <select name="data[season_id]" id="input_season">
 <?php	foreach ( $seasons as $s ) : ?>
-                <option value="<?= $s['Season']['id'] ?>"><?= substr($s['Season']['startdate'], 0, 4) . ' / ' . substr($s['Season']['enddate'], 0, 4) ?></option>
+                <option <?= $s['Season']['id'] == $active_season['Season']['id'] ? 'selected="selected" ' : '' ?>value="<?= $s['Season']['id'] ?>"><?= substr($s['Season']['startdate'], 0, 4) . ' / ' . substr($s['Season']['enddate'], 0, 4) ?></option>
 <?php	endforeach; ?>
               </select>
             </div>
@@ -135,12 +135,12 @@
             <input class="input_submit" value="spara match" type="submit" />        
           </div>
           <div class="div_textarea">
-            <label class="label_textarea" for="input_pregame"><span>Inf&ouml;rsnack:</span></label>
-            <textarea name="data[pregame]" id="input_pregame" cols="60" rows="12"></textarea>
+            <label class="label_textarea" for="input_pregame"><span>Införsnack:</span></label>
+            <textarea name="data[pregame]" id="input_pregame" class="tinymce" cols="60" rows="12"></textarea>
           </div>
           <div class="div_textarea">
             <label class="label_textarea" for="input_postgame"><span>Referat:</span></label>
-            <textarea name="data[postgame]" id="input_postgame" cols="60" rows="12"></textarea>
+            <textarea name="data[postgame]" id="input_postgame" class="tinymce" cols="60" rows="12"></textarea>
           </div>
           <div>
 <?php	if ( $messageType === 'popup' ) : ?>

@@ -22,7 +22,7 @@
 						<h3>Uttagna spelare</h3>
 						<ul>					
 <?php		foreach ( $gameplayers as $k => $player ) : ?>
-							<li><?= $player['Player']['lastname'] . ', ' . $player['Player']['firstname'] ?> <a href="<?= Anchors::Refer('admin_gamesetups') . '/delete/' . $game_id . '/' . $player['Player']['id'] . '/' . $player['Gamesetup']['id'] ?>">Ta bort</a></li>
+							<li><?= $player['Player']['firstname'] . ' ' . $player['Player']['lastname'] ?> <a href="<?= Anchors::Refer('admin_gamesetups') . '/delete/' . $game_id . '/' . $player['Player']['id'] . '/' . $player['Gamesetup']['id'] ?>">Ta bort</a></li>
 <?php		endforeach; ?>
 						</ul>
 					</div>				
@@ -31,12 +31,13 @@
 						<ul>					
 <?php		foreach ( $seasonplayers as $j => $fplayer ) :
 				if ( !in_array($fplayer['Player']['id'], $ids) ) : ?>
-							<li><?= $fplayer['Player']['lastname'] . ', ' . $fplayer['Player']['firstname'] ?> <a href="<?= Anchors::Refer('admin_gamesetups') . '/add/' . $game_id . '/' . $fplayer['Player']['id'] ?>">L&auml;gg till</a></li>
+							<li><?= $fplayer['Player']['firstname'] . ' ' . $fplayer['Player']['lastname'] ?> <a href="<?= Anchors::Refer('admin_gamesetups') . '/add/' . $game_id . '/' . $fplayer['Player']['id'] ?>">L&auml;gg till</a></li>
 <?php			endif; ?>
 <?php		endforeach; ?>
 						</ul>
 					</div>
 					<div class="div_clear"></div>
+					<div><a href="<?= Anchors::Refer('admin_gamesetups_edit') . '/' . $game_id . '/1' ?>">Hämta från innebandy.se</a></div><br />
 					<div><a href="<?= Anchors::Refer('admin_gameformations_edit') . '/' . $game_id ?>">Formationer</a></div>
 				</div>
 <?php	endif; ?>

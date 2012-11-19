@@ -5,8 +5,7 @@ class GamesController extends App_Controller
 
 	public function testgameinfo()
 	{
-			$gibf = new GibfService();
-			print_r($gibf->GetGameEvents('http://www.innebandy.se/Templates/IDA/MatchInfo.aspx?PageID=106388&MatchID=617927'));
+		//echo phpinfo();
 	}
 	
 	
@@ -18,6 +17,29 @@ class GamesController extends App_Controller
 			$this->teamSection = $teamID;
 		}
 		$this->IsAllowed();
+
+		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+			$slugString = $_POST['data']['homegame'] == 1 ? Formatter::CreateSlug($this->Game->thisTeam) . '---' . Formatter::CreateSlug($_POST['data']['opponent']) : Formatter::CreateSlug($_POST['data']['opponent']) . '---' . Formatter::CreateSlug($this->Game->thisTeam);
+			$_POST['data']['slug'] = $slugString . '-' . Formatter::CreateDateSlug($_POST['format']['gamedate']);			
+
+			$_POST['data']['gamedate'] = $_POST['format']['gamedate'] . ' ' . $_POST['format']['gametime'];
+
+			$this->Game->returnId = true;
+			
+			$this->GetResultsByHomegame($_POST['data']['homegame']);
+			
+			//print_r($_POST['data']);
+
+				
+			if ( $returnID = $this->Game->Save($_POST['data']) ) {
+				$this->SetFeedback('text', 'saved', Message::Load('game_added'));
+				$this->Redirect(Anchors::Refer('admin_games_edit') . '/' . $returnID);
+			} else {
+				$this->SetFeedback('text', 'error', Message::Load('error_saving'));
+				$this->PrintFeedback();
+			}
+		}
+
 		$this->Set('team_id', $teamID);
 		$this->Set('max_game_goals', $this->Game->maxGameGoals);		
 		$this->Set('max_period_goals', $this->Game->maxPeriodGoals);
@@ -25,6 +47,7 @@ class GamesController extends App_Controller
 		$this->Set('games', $this->Game->GetByTeam_id($this->teamSection));
 		$this->Set('gameformats', $this->Game->Gameformat->GetAll());
 		$this->Set('seasons', $this->Game->Season->GetAll());
+		$this->Set('active_season', $this->Game->Season->GetActiveSeason());
 		$this->Set('allteams', $this->Game->Team->GetAll());
 	
 		$addedScripts = array(0 => 'jquery-ui-1.8.13.custom.min', 1 => 'ui/jquery.ui.datepicker-min', 2 => 'ui/jquery.ui.datepicker-sv', 3 => 'jquery-ui-timepicker-addon', 4 => 'bbeditor/ed', 5 => 'local-datepicker', 6 => 'admin-edit-game');
@@ -111,6 +134,7 @@ class GamesController extends App_Controller
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			if ( $_POST['form_id'] == 2 ) {
 				$getUrl = $_POST['getUrl'];
+				
 				if (  array_key_exists('control', $_POST)) {
 					foreach ( $_POST['control'] as $k => $value ) {
 						$_POST['data'][$k]['team_id'] = $teamID;
@@ -119,13 +143,14 @@ class GamesController extends App_Controller
 						$this->Game->Save($_POST['data'][$k]);
 					}
 				}
+
 			} else {
 				$getUrl = $_POST['post_url'];
 			}			
 			$seasonID = $_POST['season_id'];
 			$setSeason = current($this->Game->Season->GetById($seasonID));
-			$gibf = new GibfService();
-			$this->Set('gibf_games', $gibf->GetScheduleInSeason($getUrl, $setSeason));
+			$statProxy = new StatsServiceProxy();
+			$this->Set('gibf_games', $statProxy->GetScheduleInSeason($getUrl, $setSeason));
 			$this->Set('getUrl', $getUrl);			
 			$this->Set('games', $this->Game->GetBySeasonTeam($seasonID, $teamID));
 			$this->Set('set_season', $setSeason);
@@ -142,28 +167,26 @@ class GamesController extends App_Controller
 		
 	}
 	
-	public function admin_index($teamID)
+	public function admin_index($teamID, $seasonID = 0)
 	{
 		$this->teamSection = $teamID;
 		$this->IsAllowed();
-		
+
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-			$_POST['data']['team_id'] = $teamID;
-			$_POST['data']['gamedate'] = $_POST['format']['gamedate'] . ' ' . $_POST['format']['gametime'];		
-			if ( $this->Game->Save($_POST['data']) ) {
-					$this->SetFeedback('text', 'saved', Message::Load('game_saved'));
-					$this->Redirect($_SERVER['REQUEST_URI']);	
-			} else {
-				$this->SetFeedback('text', 'error', Message::Load('error_saving'));
-				$this->PrintFeedback();
-			}
-		}				
+			$this->Redirect(Anchors::Refer('admin_games') . '/index/' . $teamID . '/' . $_POST['gdata']['season_id']);
+		}
 		
+		if ( $seasonID == 0 ) {
+			$season = $this->Game->Season->GetActiveSeason();
+			$seasonID = $season['Season']['id'];
+		}
+
 		$this->Set('defaultFormat', $this->Game->defaultGameFormat);
 		$this->Set('max_game_goals', $this->Game->maxGameGoals);		
 		$this->Set('max_period_goals', $this->Game->maxPeriodGoals);		
-		$this->Set('games', $this->Game->GetByTeam_id($teamID));
+		$this->Set('games', $this->Game->GetBySeasonTeam($seasonID, $teamID));
 		$this->Set('gameformats', $this->Game->Gameformat->GetAll());
+		$this->Set('season_id', $seasonID);
 		$this->Set('seasons', $this->Game->Season->GetAll());	
 		$this->Set('team_id', $teamID);
 
@@ -182,25 +205,34 @@ class GamesController extends App_Controller
 	public function index($teamID = 0, $setSeason = '', $gameType = 'seriematch', $gameSlug = '')
 	{
 		$activeSeason = $this->Game->Season->GetActiveSeason();
-		$thisSeason = $setSeason == '' || $setSeason == 'alla' ? ( $setSeason == '' ? $activeSeason : false )  : $this->Game->Season->GetSeasonByYears(substr($setSeason, 0, 4), substr($setSeason, 5, 4)) ;
-		$thisSeasonID = $thisSeason ? $thisSeason['Season']['id'] : 0;
+
+		$displaySeason = $this->Game->Season->GetSeasonBySeasonYears($setSeason);
+		//print_r($thisSeasonID);
 
 		if ( $gameSlug == '' ) {		
-			//$seasonID = $season['Season']['id'];
-			//$this->Set('games', $this->Game->GetFullGame($season['Season']['id'], $teamID));
-			$this->Set('games', $this->Game->GetSeasonGames($teamID, substr($setSeason, 0, 4), $gameType));
+			$this->Set('games', $this->Game->GetSeasonGamesByTeamIdSeasonIdGameType($teamID, $displaySeason['Season']['id'], $gameType));
 			$this->Set('gameDetails', 0);
 		} else {
-			$game = $this->Game->GetGameFiltered(substr($setSeason, 0, 4), $gameType, $gameSlug);
-			$this->Set('games', current($game));
-			$this->Set('gameDetails', 1);			
+			$game = current($this->Game->GetGameFiltered(substr($setSeason, 0, 4), $gameType, $gameSlug));
+			$this->Set('games', $game);
+			$this->Set('gameDetails', 1);
+			$seasonTeam = $this->Game->Team->Seasonteamtable->GetTableBySeasonTeam($displaySeason['Season']['id'], $teamID);
+			$statProxy = new StatsServiceProxy();
+			$this->Set('penaltyCodes', $statProxy->GetPenaltyCodes());			
+			$this->Set('thisTeam', $this->Game->thisTeam);
+			$this->Set('gameevent_types', $this->Game->Gameevent->gameEventTypes);
+			$this->Set('gameevents', $this->Game->Gameevent->GetGameEventsWithPlayerNames($game['Game']['id']));
+			$this->Set('layoutTitle', ( $game['Game']['homegame'] == 1 ? $this->Game->thisTeam . ' - ' . $game['Game']['opponent'] : $game['Game']['opponent'] . ' - ' . $this->Game->thisTeam ) . ' - ' . $setSeason . ', ' . $seasonTeam['Seasonteamtable']['division'] . ', Göteborg Innebandy');
 		}
 		$section = PublicWrapper::GetSection();
 		$this->Set('activeSection', current($section->GetByTarget('games/index/' . $teamID)));		
-		$this->Set('activeSeason', $activeSeason);
-		$this->Set('thisSeasonID', $thisSeasonID);
+		$this->Set('activeSeason', $this->Game->Season->GetActiveSeason());
+		$this->Set('activeGameType', $gameType);
+		$this->Set('displaySeason', $displaySeason);
 		//$this->Set('setSeason', $season);
 		$this->Set('seasons', $this->Game->Season->GetPastSeasons());
+		$this->Set('gameformats', $this->Game->Gameformat->GetAll());
+		//$this->Set('layoutTitle', 'Matchtest');
 		$this->SetContext('public');
 	}
 	

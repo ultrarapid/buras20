@@ -38,19 +38,21 @@
 <?php	  endforeach ; ?>
 <?php else : ?>
             <div>
-              <p>Inga spelare i angiven säsong</p>
+              <p>Inga spelare att visa</p>
             </div>
 <?php endif; ?>
           </div>
+          <section class="history-nav">
 <?php if ( !empty($seasons) ) : ?>
-          <nav class="season-nav">
-            <ul>
+            <nav class="season-nav">
+              <ul>
 <?php   foreach ( $seasons as $s ) : ?>
               <li>
                 <a<?= $s['Season']['id'] == $thisSeasonID ? ' class="active"' : ''  ?> href="<?= '/' . $activeSection['Section']['url'] . '/' . substr($s['Season']['startdate'], 0, 4) . '-' . substr($s['Season']['enddate'], 0, 4) . '.html' ?>"><?= substr($s['Season']['startdate'], 2, 2) . '/' . substr($s['Season']['enddate'], 2, 2)  ?></a>
               </li>
 <?php   endforeach; ?>
-            </ul>
-          </nav>
-<?php endif; ?>          
+              </ul>
+            </nav>
+<?php endif; ?>
+          </section>        
           <div class="clear"></div>
