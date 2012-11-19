@@ -9,7 +9,6 @@ htdocs/bilder
 backup
 
 #conn
-sftp-config.json
 
 #temporary files
 tmp/**/*
