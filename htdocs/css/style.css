@@ -85,13 +85,12 @@ body {
 }
 
 .main-nav li {
-	float: left;
+	display: inline-block;
 	padding: .2em 1.5em .3em 0;	
 }
 
 .main-nav li a {
 	color: #555;
-	display: inline-block;
 	font-family: Arimo, Arial, Helvetica, sans-serif;
 	font-size: 1.2em;
 	font-weight: bold;
@@ -99,12 +98,6 @@ body {
 	text-decoration: none;
 	text-transform: uppercase;
 }
-/*
-.main-nav li .active {
-	background-color: #03542e;
-	color: #fff;
-}
-*/
 
 .section-header, .main-nav {
 	zoom: 1\9; /* IE8 and below clearfix */ 
@@ -252,7 +245,9 @@ body {
 	width: 100%;
   max-width: 960px;
   padding: 8px;  
-  box-shadow: 0px 1px 5px 0px #b5b5b5; -webkit-box-shadow: 0px 1px 5px 0px #b5b5b5; -moz-box-shadow: 0px 1px 5px 0px #b5b5b5;
+  box-shadow: 0px 1px 5px 0px #b5b5b5; 
+  -webkit-box-shadow: 0px 1px 5px 0px #b5b5b5; 
+  -moz-box-shadow: 0px 1px 5px 0px #b5b5b5;
 }
 
 .page .slider-wrapper .nivoSlider {
@@ -307,7 +302,7 @@ section.calendar header .year {
 
 section.calendar ol li {
 	display: inline-block;
-	*float: left;
+	/**float: left;*/
 	font-size: 1.1em; font-weight: bold;
 	height: 27px; width: 40px;
 	text-align: center;
@@ -783,6 +778,27 @@ section.game-events span:nth-child(4) {
 section.game-events span:nth-child(5) {
 	width: 200px;
 }
+
+.gamenew-game-events-row {
+	margin: 0 auto;
+	width: 50%;
+}
+
+.gamenew-game-events-row header {
+
+}
+
+.gamenew-game-events-row > * {
+	display: block;
+	font-size: 2em;
+	margin: 0 3px 0;
+	text-align: center;
+}
+
+.gamenew-game-events-teamlogo {
+	width: 50px;
+}
+
 
 /*  table  */
 
