@@ -86,6 +86,7 @@ body {
 
 .main-nav li {
 	display: inline-block;
+	*float: left;
 	padding: .2em 1.5em .3em 0;	
 }
 
