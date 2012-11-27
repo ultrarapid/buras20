@@ -13,7 +13,7 @@
 <?php	else : ?>
 						<td></td>
 <?php	endif; ?>
-<?php	if ( $playerstat['Playerstat']['ordernr'] > $minOrder ) : ?>
+<?php	if ( $playerstat['Playerstat']['ordernr'] > $minOrder && false ) : ?>
 						<td class="playerstat_moveup td_moveup"><a href="<?= Anchors::Refer('admin_playerstats') . '/moveup/' . $playerstat['Playerstat']['ordernr'] ?>">upp</a></td>
 <?php	else : ?>
 						<td></td>
