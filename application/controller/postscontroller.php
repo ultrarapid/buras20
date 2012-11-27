@@ -98,6 +98,9 @@ class PostsController extends App_Controller
 		$this->Set('previousWomensGame', $game->GetPreviousGame(2));
 		$this->Set('latestPosts', $this->Post->GetLatestPosts(1, 3));
 
+		$this->Set('layoutMetaDescription', 'Burås innebandyklubb är en anrik förening i hjärtat av Göteborg. Vi har ett damlag i division 2 och ett herrlag i division 3. Spela innebandy med oss.');
+
+		$this->Set('layoutMetaKeywords', 'Burås, Innebandyklubb, Innebandy, Göteborg');
 
 		$this->SetContext('public', array(0 => 'nivo/nivo-slider/jquery.nivo.slider.pack', 1 => 'loader'), array(), array(0 => array('ElementName' => 'link', 'Attributes' => $attributes)));
 	}
