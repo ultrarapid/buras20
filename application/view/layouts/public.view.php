@@ -3,6 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <title><?= isset($layoutTitle) ? $layoutTitle : 'Burås Innebandy - Göteborg' ?></title>
+<?php if ( isset($layoutMetaDescription) ) : ?>
+    <meta name="description" content="<?= $layoutMetaDescription ?>" />
+<?php endif; ?>
+<?php if ( isset($layoutMetaKeywords) ) : ?>
+    <meta name="keywords" content="<?= $layoutMetaKeywords ?>" />
+<?php endif; ?>
     <link rel="stylesheet" type="text/css" href="<?= Anchors::Refer('stylesheet_folder') ?>/style.css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Arimo:400,700,900|Droid+Serif:400,700,700italic,400italic" />
     <link rel="shortcut icon" href="<?= Anchors::Refer('base') ?>/favicon.ico" />
