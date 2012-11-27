@@ -4,6 +4,7 @@ config/connection.php
 #images
 htdocs/img
 htdocs/bilder
+htdocs/skiss
 
 #backups
 backup
