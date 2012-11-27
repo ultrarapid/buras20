@@ -41,6 +41,31 @@
                 <span>Assist</span>
                 <span>Info</span>
               </section>
+              <section class="gamenew-game-events-body">
+<?php       foreach ( $gameevents as $ge ) : ?>
+                <article class="gamenew-game-events-row">
+                  <time><?= $ge['Gameevent']['time'] == '01:00:00' ? '60:00' : substr($ge['Gameevent']['time'], 3); ?></time>
+<?php         if ( $ge['Gameevent']['eventtype'] == 1 ) : ?>
+<?php         $ge['Gameevent']['thisteam'] == 1 ? $ourScore++ : $theirScore++; ?>
+<?php         endif; ?>
+                  <header>
+                    <h4><?= $ge['Gameevent']['eventtype'] != 1 ? $gameevent_types[$ge['Gameevent']['eventtype']] : ( $games['Game']['homegame'] == 1 ? $ourScore . ' - ' . $theirScore : $theirScore . ' - ' . $ourScore ); ?></h4>
+                  </header>
+                  <div class="logo-container">
+<?php           if ( $ge['Gameevent']['thisteam'] == 1 ) : ?>
+                    <img class="gamenew-game-events-teamlogo" src="/img/buras-logo-solid.png" alt="Burås Logotype" />
+<?php           else : ?>
+                    <div class="gamenew-game-events-opponent-image"></div>
+<?php           endif; ?>
+                  </div>
+                </article>
+<?php       endforeach; ?>
+              </section>                
+
+
+
+<?php /* 
+
               <section class="game-events-body">
 <?php       foreach ( $gameevents as $ge ) : ?>
                 <section class="game-events-row">
@@ -78,6 +103,7 @@
                 </section>
 <?php       endforeach; ?>
               </section>
+              */ ?>
 <?php   endif; ?>
             </section>
 <?php     endif; ?>
