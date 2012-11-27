@@ -36,6 +36,12 @@ class Gameevent extends App_Model
    * @var array Timeouts from the games
    */		
 	private $_timeouts		 = array();
+
+  /**
+   * Time in seconds to cache the table of the active season
+   * @var int
+   */
+	private $_cachetime = 3153600000; //60 * 60 * 24 * 365 * 100;
 	
 	public function __construct($bound = array())
 	{
@@ -69,6 +75,7 @@ class Gameevent extends App_Model
 	*/
 	public function GetBoxplayGoalsBySeasonTeam($seasonID, $teamID, $gameformatID = 1, $thisteam = 1)
 	{
+		/*
 		$playercompare = $thisteam == 0 ? '>' : '<';
 
 		$stmt = 'SELECT count(ge.id) as Team_bpcount FROM bik_gameevents as ge
@@ -82,7 +89,8 @@ class Gameevent extends App_Model
 						AND ge.ourplayers ' . $playercompare . ' ge.theirplayers';
 		
 		$values = array($seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $thisteam);
-		return current($this->GetResult($stmt, $values));
+		return current($this->GetResult($stmt, $values));*/
+		return $this->GetBoxplayGoalsBySeasonTeamCached($seasonID, $teamID, $gameformatID, $thisteam);
 	}
 
  /**
@@ -365,6 +373,200 @@ class Gameevent extends App_Model
 	}
 
  /**
+	* Fills Game event array. Filters post data based on which events
+	* occuring.
+	*
+	* @param $_POST needs to be set
+	* @throws none
+	* @return array Array with filtered game event data
+	*/
+	private function FillGameArrayFromPostData()
+	{
+		$geArr = array();
+		foreach ( $_POST['data'] as $k => $value ) {
+			$geArr[$k] 						= $_POST['data'][$k];
+			$geArr[$k]['game_id'] = $this->_gameID;
+			if ( $_POST['data'][$k]['eventtype'] == 1 ) {
+				// goal
+				$geArr[$k] = array_merge($geArr[$k], $this->GetScore($k));
+			}
+			else if ( $_POST['data'][$k]['eventtype'] == 2 ) {
+				// penalty
+				$geArr[$k] = array_merge($geArr[$k], $this->GetPenalty($k));
+			} else if ( $_POST['data'][$k]['eventtype'] == 3 ) {
+				// timeout
+				$geArr[$k] = array_merge($geArr[$k], $this->GetTimeout($k));
+			} else if ( $_POST['data'][$k]['eventtype'] == 4 ) {
+				// penalty shot
+				$geArr[$k] = array_merge($geArr[$k], $this->GetPenaltyShot($k));
+			}
+		}
+		return $geArr;
+	}
+
+ /**
+	* Gets made boxplay goals
+	*
+	* @param  integer Season ID
+	* @param  integer Team ID	
+	* @param  integer Gameformat ID
+	* @param  integer thisteam
+	* @throws none
+	* @return array With Player id, name and amount of goals
+	*/
+	private function GetBoxplayGoalsBySeasonTeamCached($seasonID, $teamID, $gameformatID, $thisteam)
+	{
+		$call = array($this, 'GetBoxplayGoalsBySeasonTeamUnCached');
+
+		return $this->SetCache('GetBoxplayGoalsBySeasonTeamUnCached', func_get_args());
+	}
+
+	protected function SetCache($fallback, $vars = array(), $cachetime = null)
+	{
+		$cacheName = Anchors::Internal('cache') . DS . get_class($this) . '-' . implode('-', $vars) . '.txt';
+		
+		$cacheTime = $cachetime == null ? $this->_cachetime : $cachetime;
+
+		if ( file_exists($cacheName) && ( time() - $cacheTime < filemtime($cacheName) ) ) {
+			$statarray = unserialize(file_get_contents($cacheName));
+		} else {
+			$statarray = call_user_func_array(array($this, $fallback), $vars);
+			if ( !empty($statarray) ) {
+				file_put_contents($cacheName, serialize($statarray));
+			}						
+		}
+		return $statarray;		
+	}
+
+ /**
+	* Gets made boxplay goals
+	*
+	* @param  integer Season ID
+	* @param  integer Team ID	
+	* @param  integer Gameformat ID
+	* @param  integer thisteam
+	* @throws none
+	* @return array With Player id, name and amount of goals
+	*/
+	public function GetBoxplayGoalsBySeasonTeamUnCached($seasonID, $teamID, $gameformatID, $thisteam)
+	{
+		$playercompare = $thisteam == 0 ? '>' : '<';
+
+		$stmt = 'SELECT count(ge.id) as Team_bpcount FROM bik_gameevents as ge
+						INNER JOIN bik_games AS g
+						ON g.id = ge.game_id
+						WHERE (g.season_id = ? OR 0 = ?)
+						AND (g.team_id = ? OR 0 = ?)
+						AND (g.gameformat_id = ? OR 0 = ?)
+						AND ge.thisteam = ?
+						AND ge.eventtype = 1
+						AND ge.ourplayers ' . $playercompare . ' ge.theirplayers';
+		
+		$values = array($seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $thisteam);
+		return current($this->GetResult($stmt, $values));
+	}
+
+ /**
+	* Adds specific penalty data to game event array
+	*
+	* @param  integer Key in $_POST to this game event
+	* @throws none
+	* @return array Array with this event data
+	*/
+	private function GetPenalty($key)
+	{
+		$peArr = array();
+
+		$peArr['teamtime'] 		= '00:0' . $_POST['ctrl'][$key]['teamtime'] . ':00';
+		$peArr['playertime']  = '00:' . ( ( strlen($_POST['ctrl'][$key]['playertime']) == 2 ) ? $_POST['ctrl'][$key]['playertime'] : '0' . $_POST['ctrl'][$key]['playertime'] )  . ':00';
+		$peArr['thisteam']		= $_POST['data'][$key]['thisteam'];
+		$peArr['time']				= $_POST['data'][$key]['time'];
+
+		$primaryKey = 'penalty_player_id';
+
+		if ( $_POST['data'][$key]['thisteam'] == 1 ) {
+			if ( array_key_exists($primaryKey, $_POST['ctrl'][$key]) && $_POST['ctrl'][$key][$primaryKey] > 0 ) {
+				$peArr['primaryplayer_id'] = $this->Game->Gamesetup->Player->GetLocalIDAndSetGibfID($_POST['ctrl'][$key][$primaryKey], $_POST['ctrl'][$key]['penalty_player_name']);
+			}	else {
+				$peArr['primaryplayer_id'] = -1;
+			}
+		}
+
+		$this->_penalties[] = $peArr;
+
+		return $peArr;
+	}
+
+ /**
+	* Adds specific penalty shot data to game event array
+	*
+	* @param  integer Key in $_POST to this game event
+	* @throws none
+	* @return array Array with this event data
+	*/
+	private function GetPenaltyShot($key)
+	{
+		$psArr = array();
+
+		$psArr['thisteam']		= $_POST['data'][$key]['thisteam'];
+		$psArr['time']				= $_POST['data'][$key]['time'];
+
+		$this->_penaltyshots[] = $psArr;
+
+		return $psArr;
+	}
+
+ /**
+	* Adds specific goal data to game event array
+	*
+	* @param  integer Key in $_POST to this game event
+	* @throws none
+	* @return array Array with this event data
+	*/
+	private function GetScore($key)
+	{
+		$scArr = array();
+
+		$primaryKey   = 'primaryplayer_id';
+		$secondaryKey = 'secondaryplayer_id';
+
+		if ( $_POST['data'][$key]['thisteam'] == 1 ) {
+			if ( array_key_exists($primaryKey, $_POST['ctrl'][$key]) && $_POST['ctrl'][$key][$primaryKey] > 0 ) {
+				$scArr[$primaryKey] = $this->Game->Gamesetup->Player->GetLocalIDAndSetGibfID($_POST['ctrl'][$key][$primaryKey], $_POST['ctrl'][$key]['primaryplayer_name']);
+			}	else {
+				$scArr[$primaryKey] = -1;
+			}
+			if ( array_key_exists($secondaryKey, $_POST['ctrl'][$key]) && $_POST['ctrl'][$key][$secondaryKey] > 0 ) {
+				$scArr[$secondaryKey] = $this->Game->Gamesetup->Player->GetLocalIDAndSetGibfID($_POST['ctrl'][$key][$secondaryKey], $_POST['ctrl'][$key]['secondaryplayer_name']);
+			}
+			
+		}
+		$scArr['code'] 		 = 0;
+		$scArr['thisteam'] = $_POST['data'][$key]['thisteam'];
+		$scArr['time'] 		 = $_POST['data'][$key]['time'];
+
+		$this->_scores[] = $scArr;
+
+		return $scArr;
+	}
+
+ /**
+	* Adds specific timeout data to game event array
+	*
+	* @param  integer Key in $_POST to this game event
+	* @throws none
+	* @return array Array with this event data
+	*/
+	private function GetTimeout()
+	{
+		$toArr = array();
+
+		$this->_timeouts[] = $toArr;
+
+		return $toArr;
+	}
+
+ /**
 	* Calculates how many players is on the field on specific times
 	* and sets some codes to specify game events
 	*
@@ -509,135 +711,4 @@ class Gameevent extends App_Model
 		return $geArr;	
 	}
 
- /**
-	* Fills Game event array. Filters post data based on which events
-	* occuring.
-	*
-	* @param $_POST needs to be set
-	* @throws none
-	* @return array Array with filtered game event data
-	*/
-	private function FillGameArrayFromPostData()
-	{
-		$geArr = array();
-		foreach ( $_POST['data'] as $k => $value ) {
-			$geArr[$k] 						= $_POST['data'][$k];
-			$geArr[$k]['game_id'] = $this->_gameID;
-			if ( $_POST['data'][$k]['eventtype'] == 1 ) {
-				// goal
-				$geArr[$k] = array_merge($geArr[$k], $this->GetScore($k));
-			}
-			else if ( $_POST['data'][$k]['eventtype'] == 2 ) {
-				// penalty
-				$geArr[$k] = array_merge($geArr[$k], $this->GetPenalty($k));
-			} else if ( $_POST['data'][$k]['eventtype'] == 3 ) {
-				// timeout
-				$geArr[$k] = array_merge($geArr[$k], $this->GetTimeout($k));
-			} else if ( $_POST['data'][$k]['eventtype'] == 4 ) {
-				// penalty shot
-				$geArr[$k] = array_merge($geArr[$k], $this->GetPenaltyShot($k));
-			}
-		}
-		return $geArr;
-	}
-
- /**
-	* Adds specific penalty data to game event array
-	*
-	* @param  integer Key in $_POST to this game event
-	* @throws none
-	* @return array Array with this event data
-	*/
-	private function GetPenalty($key)
-	{
-		$peArr = array();
-
-		$peArr['teamtime'] 		= '00:0' . $_POST['ctrl'][$key]['teamtime'] . ':00';
-		$peArr['playertime']  = '00:' . ( ( strlen($_POST['ctrl'][$key]['playertime']) == 2 ) ? $_POST['ctrl'][$key]['playertime'] : '0' . $_POST['ctrl'][$key]['playertime'] )  . ':00';
-		$peArr['thisteam']		= $_POST['data'][$key]['thisteam'];
-		$peArr['time']				= $_POST['data'][$key]['time'];
-
-		$primaryKey = 'penalty_player_id';
-
-		if ( $_POST['data'][$key]['thisteam'] == 1 ) {
-			if ( array_key_exists($primaryKey, $_POST['ctrl'][$key]) && $_POST['ctrl'][$key][$primaryKey] > 0 ) {
-				$peArr['primaryplayer_id'] = $this->Game->Gamesetup->Player->GetLocalIDAndSetGibfID($_POST['ctrl'][$key][$primaryKey], $_POST['ctrl'][$key]['penalty_player_name']);
-			}	else {
-				$peArr['primaryplayer_id'] = -1;
-			}
-		}
-
-		$this->_penalties[] = $peArr;
-
-		return $peArr;
-	}
-
- /**
-	* Adds specific penalty shot data to game event array
-	*
-	* @param  integer Key in $_POST to this game event
-	* @throws none
-	* @return array Array with this event data
-	*/
-	private function GetPenaltyShot($key)
-	{
-		$psArr = array();
-
-		$psArr['thisteam']		= $_POST['data'][$key]['thisteam'];
-		$psArr['time']				= $_POST['data'][$key]['time'];
-
-		$this->_penaltyshots[] = $psArr;
-
-		return $psArr;
-	}
-
- /**
-	* Adds specific goal data to game event array
-	*
-	* @param  integer Key in $_POST to this game event
-	* @throws none
-	* @return array Array with this event data
-	*/
-	private function GetScore($key)
-	{
-		$scArr = array();
-
-		$primaryKey   = 'primaryplayer_id';
-		$secondaryKey = 'secondaryplayer_id';
-
-		if ( $_POST['data'][$key]['thisteam'] == 1 ) {
-			if ( array_key_exists($primaryKey, $_POST['ctrl'][$key]) && $_POST['ctrl'][$key][$primaryKey] > 0 ) {
-				$scArr[$primaryKey] = $this->Game->Gamesetup->Player->GetLocalIDAndSetGibfID($_POST['ctrl'][$key][$primaryKey], $_POST['ctrl'][$key]['primaryplayer_name']);
-			}	else {
-				$scArr[$primaryKey] = -1;
-			}
-			if ( array_key_exists($secondaryKey, $_POST['ctrl'][$key]) && $_POST['ctrl'][$key][$secondaryKey] > 0 ) {
-				$scArr[$secondaryKey] = $this->Game->Gamesetup->Player->GetLocalIDAndSetGibfID($_POST['ctrl'][$key][$secondaryKey], $_POST['ctrl'][$key]['secondaryplayer_name']);
-			}
-			
-		}
-		$scArr['code'] 		 = 0;
-		$scArr['thisteam'] = $_POST['data'][$key]['thisteam'];
-		$scArr['time'] 		 = $_POST['data'][$key]['time'];
-
-		$this->_scores[] = $scArr;
-
-		return $scArr;
-	}
-
- /**
-	* Adds specific timeout data to game event array
-	*
-	* @param  integer Key in $_POST to this game event
-	* @throws none
-	* @return array Array with this event data
-	*/
-	private function GetTimeout()
-	{
-		$toArr = array();
-
-		$this->_timeouts[] = $toArr;
-
-		return $toArr;
-	}
 }
