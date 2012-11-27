@@ -2,8 +2,8 @@
 class Game extends App_Model
 {
 	public $defaultGameFormat = 1;
-	public $maxGameGoals      = 30;
-	public $maxPeriodGoals    = 15;
+	public $maxGameGoals      = 60;
+	public $maxPeriodGoals    = 20;
 	public $thisTeam          = 'Burås IK';
 		
 	public function __construct($bound = array()) 
