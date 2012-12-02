@@ -1,6 +1,7 @@
 <?php
 class PostsController extends App_Controller
 {
+	private $_paging = 10;
 	protected $args = array();
 	protected $messageID = 0;
 	protected $messageText = '';
@@ -83,6 +84,17 @@ class PostsController extends App_Controller
 		$this->SetContext('admin');
 	}
 
+	public function getposts($postid, $lastid)
+	{
+		$section = PublicWrapper::GetSection();
+		$sect = current($section->GetById($postid));
+		$this->Set('section', $sect);
+		$this->Post->conditions = array(0 => array('field' => 'section_id', 'value' => '?'), 1 => array('field' => 'id', 'separator' => '<', 'value' => '?'), 2 => array('field' => 'published', 'value' => 1)); 
+		$this->Post->limit = array('start' => 0, 'end' => $this->_paging);
+		$this->Set('posts', $this->Post->GetWithValues(array($postid, $lastid)));
+		$this->Set('paging', $this->_paging);
+	}
+
 	public function home()
 	{
 		$this->Set('removeHeader', 1);
@@ -125,9 +137,13 @@ class PostsController extends App_Controller
 			$this->Set('singlepost', true);
 			$this->Set('layoutTitle', $posts[0]['Post']['header'] . ' - Innebandynyheter ');
 		} else {
-			$this->Set('posts', $this->Post->GetBySection_id($section));
+			$this->Post->limit = array('start' => 0, 'end' => $this->_paging);
+			$this->Post->conditions = array(0 => array('field' => 'section_id', 'value' => $section), 1 => array('field' => 'published', 'value' => 1)); 
+			$this->Set('posts', $this->Post->Get());
 			$this->Set('singlepost', false);
+			$this->Set('amount', $this->Post->CountConditional());
 			$this->Set('layoutTitle', 'Innebandynyheter - Burås Göteborg');
+			$this->SetContext('public', array(0 => 'more-news'));	
 		}
 		if ( $section == 3 ) {
 			$game = new Game();
@@ -142,8 +158,12 @@ class PostsController extends App_Controller
 		
 		$this->args = func_get_args();		
 		//$this->GetPage();
+		if ( empty($post) ) {
+			$this->SetContext('public', array(0 => 'more-news'));
+		} else {
+			$this->SetContext('public');	
+		}
 		
-		$this->SetContext('public');
 	}
 	
 	public function news()
