@@ -80,8 +80,8 @@ class App_Controller extends Controller
 			//print_r('ad,ts0');exit;
 		}
 		$deny = true;
-		$this->SessionStart();		
-		
+		$this->SessionStart();
+
 		foreach ( $_SESSION['User']['allowed'] as $aid ) {
 			if ( $aid == $this->adminSection ) {
 				$deny = false;
