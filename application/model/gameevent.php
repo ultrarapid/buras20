@@ -63,6 +63,33 @@ class Gameevent extends App_Model
 		$this->relations['manyToOne'] = array('games' => array('class' => 'Game', 'fk' => 'game_id'), 'player' => array('class' => 'Player', 'fk' => 'primaryplayer_id' , 'join' => 'LEFT OUTER'));
 	}
 
+	public function ClearAllCache($seasonID, $teamID, $gameformatID = 1)
+	{
+
+	}
+
+	public function ClearCacheAffectedByGameEvents($gameID)
+	{
+		$game = current($this->Game->GetById($gameID));
+		$seasonID = $game['Game']['season_id'];
+		$teamID = $game['Game']['team_id'];
+		$gameformatID = 1;
+		$gameeventMethods = array('GetBoxplayGoalsBySeasonTeam', 'GetPowerplayGoalsBySeasonTeam', 'GetPowerPlayOpportunitiesBySeasonTeam', 'GetTopPasserBySeasonTeam', 'GetTopPenaltyBySeasonTeam', 'GetTopPointsBySeasonTeam', 'GetTopScorerBySeasonTeam');
+		foreach ( $this->GetCachedFiles() as $f ) {
+			foreach ( $gameeventMethods as $m ) {
+				if ( strpos($f, $m . '-' . $seasonID . '-' . $teamID . '-' . $gameformatID) !== false || strpos($f, $m . '-' . 0 . '-' . $teamID . '-' . $gameformatID ) !== false ) {
+					try {
+						unlink(Anchors::Internal('cache') . DS . get_class($this) . DS . $f);
+					} catch (Exception $e) {
+
+					}
+
+				}
+			}
+		}
+	}
+
+
  /**
 	* Gets made boxplay goals
 	*
@@ -425,7 +452,7 @@ class Gameevent extends App_Model
 	*/
 	protected function CreateCache($call, $vars = array(), $cachetime = null)
 	{
-		$cacheName = Anchors::Internal('cache') . DS . get_class($this) . '-' . $call . '-' . implode('-', $vars) . '.txt';
+		$cacheName = Anchors::Internal('cache') . DS . get_class($this) . DS . $call . '-' . implode('-', $vars) . '.txt';
 		
 		$cacheTime = $cachetime == null ? $this->_cachetime : $cachetime;
 
@@ -470,6 +497,22 @@ class Gameevent extends App_Model
 			}
 		}
 		return $geArr;
+	}
+
+	private function GetCachedFiles()
+	{
+		if ( $cachedir = opendir(Anchors::Internal('cache') . DS . get_class($this)) ) {
+			$fileArray = array();
+	    while ( false !== ($file = readdir($cachedir)) ) {
+	    	if ( $file !== '.' && $file !== '..' ) { 
+        	$fileArray[] = $file; 
+        }
+	    }
+	    closedir($cachedir);
+	    return $fileArray;
+	  } else {
+	  	return array();
+	  }
 	}
 
  /**

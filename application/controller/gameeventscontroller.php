@@ -14,6 +14,7 @@ class GameeventsController extends App_Controller
 				if ( $_POST['form_id'] == 2 ) {
 					if (array_key_exists('data', $_POST)) {
 						$this->Gameevent->SaveGameeventData($gameID);
+						$this->Gameevent->ClearCacheAffectedByGameEvents($gameID);
 					}
 				}
 			} 
