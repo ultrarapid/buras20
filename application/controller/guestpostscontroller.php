@@ -29,8 +29,6 @@ class GuestpostsController extends App_Controller
 	{
 		$this->Guestpost->conditions = array(0 => array('field' => 'id', 'separator' => '<', 'value' => $lastID), 1 => array('field' => 'visible', 'value' => 1)); 
 		$this->Guestpost->limit = array('start' => 0, 'end' => $this->paging);
-		//$this->Guestpost->displayQuery = true;
-		//$gbposts = $this->Guestpost->GetAll();
 		$this->Set('gbposts', $this->Guestpost->GetAll());
 		$this->Set('paging', $this->paging);
 	}
