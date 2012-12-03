@@ -99,7 +99,7 @@
             </div>
 <?php     endif; ?>
 <?php   endif; ?>
+            <input type="hidden" name="amount" value="<?= $amount ?>" />
+            <input type="hidden" name="k-add-one" value="<?= ($k+1) ?>" />
 <?php	endif; ?>
           </div>
-          <input type="hidden" name="amount" value="<?= $amount ?>" />
-          <input type="hidden" name="k-add-one" value="<?= ($k+1) ?>" />
