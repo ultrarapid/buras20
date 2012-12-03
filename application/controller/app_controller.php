@@ -301,7 +301,7 @@ class App_Controller extends Controller
 		if ( $parent_id > 0 || $section->HasSubMenu($active_id) ) {
 			$this->Set('layoutSubMenu', $section->GetMenu($active_main));
 		}
-		$game = new Game();
+		$game  = new Game();
 		$event = new Event();
 		$this->Set('nextMensGame', $game->GetNextGame(1));
 		$this->Set('nextWomensGame', $game->GetNextGame(2));
