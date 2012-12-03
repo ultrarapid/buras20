@@ -280,14 +280,17 @@ class App_Controller extends Controller
 	private function SettingsPublic()
 	{
 		$section = PublicWrapper::GetSection();
-		$startpage = $section->GetByStartpage(1);
-		$active_id = $startpage[0]['Section']['id'];
 
-		$parent_id = DEFAULT_PARENT;
+		$active_id;
+		$parent_id;
 					
 		if ( defined('SECTION_PARENT') && defined('SECTION_ACTIVE') ) {
 			$parent_id = SECTION_PARENT;
 			$active_id = SECTION_ACTIVE;
+		} else {
+			$parent_id = DEFAULT_PARENT;
+			$startpage = $section->GetByStartpage(1);
+			$active_id = $startpage[0]['Section']['id'];
 		}
 		$active_main = $active_id;
 		$active_sub  = $active_id;
