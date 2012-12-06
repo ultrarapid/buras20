@@ -11,7 +11,7 @@
             </div>
             <div class="div_radio">
               <div class="div_radio_wrap">
-                <input id="input_game_homegame" name="data[homegame]" type="radio" checked="checked" />
+                <input id="input_game_homegame" name="data[homegame]" type="radio" checked="checked" value="1" />
                 <label class="label_radio" for="input_game_homegame"><span>Hemmamatch</span></label>
               </div>
               <div class="div_radio_wrap">
