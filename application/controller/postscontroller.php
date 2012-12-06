@@ -142,7 +142,6 @@ class PostsController extends App_Controller
 			$this->Set('posts', $this->Post->Get());
 			$this->Set('singlepost', false);
 			$this->Set('amount', $this->Post->CountConditional());
-			$this->Set('layoutTitle', 'Innebandynyheter - Burås Göteborg');
 			$this->SetContext('public', array(0 => 'more-news'));	
 		}
 		if ( $section == 3 ) {
