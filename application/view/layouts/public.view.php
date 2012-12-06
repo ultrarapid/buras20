@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title><?= isset($layoutTitle) ? $layoutTitle : 'Burås Innebandy - Göteborg' ?></title>
+    <title><?= isset($layoutTitle) ? $layoutTitle : ( isset($section['Section']['title']) && $section['Section']['title'] != '' ? $section['Section']['title'] : 'Burås Innebandy - Göteborg'); ?></title>
 <?php if ( isset($layoutMetaDescription) ) : ?>
     <meta name="description" content="<?= $layoutMetaDescription ?>" />
 <?php endif; ?>
