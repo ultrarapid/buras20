@@ -44,6 +44,34 @@ class SectionsController extends App_Controller
 		$this->SetContext('admin');	
 	}
 	
+	public function manualadd()
+	{
+		$arr = array();
+		$arr[0]['id'] = 27;
+		$arr[0]['title'] = 'Kom och träna med Burås herrlag';
+		$arr[1]['id'] = 28;
+		$arr[1]['title'] = 'Spela innebandy i Göteborg med Burås damlag';
+		$arr[2]['id'] = 1;
+		$arr[2]['title'] = 'Innebandynyheter - Burås Göteborg';
+		$arr[3]['id'] = 15;
+		$arr[3]['title'] = 'Burås herrtrupp';
+		$arr[4]['id'] = 14;
+		$arr[4]['title'] = 'Damspelare - Burås Innebandy';
+		$arr[5]['id'] = 22;
+		$arr[5]['title'] = 'Burås Önskelista';
+		$arr[6]['id'] = 6;
+		$arr[6]['title'] = 'Matcher - Herr - Göteborg div3';
+		$arr[7]['id'] = 12;
+		$arr[7]['title'] = 'Göteborg div2 - Damernas matcher';
+		$arr[8]['id'] = 19;
+		$arr[8]['title'] = 'Göteborg div3 - Tabell - Burås innebandy';
+		$arr[9]['id'] = 20;
+		$arr[9]['title'] = 'Tabell - Göteborg div2 - Burås innebandy';		
+		foreach ( $arr as $a ) {
+			$this->Section->Save($a);
+		}
+	}
+
 	private function StartpageReset()
 	{
 		$startpage = $this->Section->GetByStartpage(1);
