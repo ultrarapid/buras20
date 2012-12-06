@@ -46,6 +46,7 @@ class SectionsController extends App_Controller
 	
 	public function manualadd()
 	{
+		/*
 		$arr = array();
 		$arr[0]['id'] = 27;
 		$arr[0]['title'] = 'Kom och träna med Burås herrlag';
@@ -70,6 +71,7 @@ class SectionsController extends App_Controller
 		foreach ( $arr as $a ) {
 			$this->Section->Save($a);
 		}
+		*/
 	}
 
 	private function StartpageReset()
