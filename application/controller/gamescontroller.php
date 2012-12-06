@@ -30,7 +30,7 @@ class GamesController extends App_Controller
 			
 			//print_r($_POST['data']);
 
-				
+			
 			if ( $returnID = $this->Game->Save($_POST['data']) ) {
 				$this->SetFeedback('text', 'saved', Message::Load('game_added'));
 				$this->Redirect(Anchors::Refer('admin_games_edit') . '/' . $returnID);
@@ -38,6 +38,7 @@ class GamesController extends App_Controller
 				$this->SetFeedback('text', 'error', Message::Load('error_saving'));
 				$this->PrintFeedback();
 			}
+			
 		}
 
 		$this->Set('team_id', $teamID);
@@ -212,6 +213,7 @@ class GamesController extends App_Controller
 		if ( $gameSlug == '' ) {		
 			$this->Set('games', $this->Game->GetSeasonGamesByTeamIdSeasonIdGameType($teamID, $displaySeason['Season']['id'], $gameType));
 			$this->Set('gameDetails', 0);
+			$this->Set('layoutTitle', $this->GetPageTitle($teamID, $displaySeason, $gameType));
 		} else {
 			$game = current($this->Game->GetGameFiltered(substr($setSeason, 0, 4), $gameType, $gameSlug));
 			$this->Set('games', $game);
@@ -236,34 +238,52 @@ class GamesController extends App_Controller
 		$this->SetContext('public');
 	}
 	
+	 /**
+	* Assigns ourteam goals and theirteam goals depending
+	* on home/away game
+	*
+	* @param  integer homegame 0/1
+	* @throws none
+	*/
 	private function GetResultsByHomegame($homegame = 1)
 	{
-		if ( $homegame == 1 ) {
-			
-			$_POST['data']['ourscore']  = $_POST['rawdata']['homescore'];
-			$_POST['data']['ourfirst']  = $_POST['rawdata']['homefirst'];
-			$_POST['data']['oursecond'] = $_POST['rawdata']['homesecond'];
-			$_POST['data']['ourthird']  = $_POST['rawdata']['homethird'];
-			
-			$_POST['data']['theirscore']  = $_POST['rawdata']['awayscore'];
-			$_POST['data']['theirfirst']  = $_POST['rawdata']['awayfirst'];
-			$_POST['data']['theirsecond'] = $_POST['rawdata']['awaysecond'];
-			$_POST['data']['theirthird']  = $_POST['rawdata']['awaythird'];
-			
-		} else if ( $homegame == 0 ) {
-			
-			$_POST['data']['ourscore']  = $_POST['rawdata']['awayscore'];
-			$_POST['data']['ourfirst']  = $_POST['rawdata']['awayfirst'];
-			$_POST['data']['oursecond'] = $_POST['rawdata']['awaysecond'];
-			$_POST['data']['ourthird']  = $_POST['rawdata']['awaythird'];	
-			
-			$_POST['data']['theirscore']  = $_POST['rawdata']['homescore'];
-			$_POST['data']['theirfirst']  = $_POST['rawdata']['homefirst'];
-			$_POST['data']['theirsecond'] = $_POST['rawdata']['homesecond'];
-			$_POST['data']['theirthird']  = $_POST['rawdata']['homethird'];
-								
-		}
 		
+		$keys  = array('score', 'first', 'second', 'third');
+		$our   = $homegame == 1 ? 'home' : 'away';
+		$their = $homegame == 1 ? 'away' : 'home';
+
+		foreach ( $keys as $k ) {
+			$_POST['data']['our' . $k]   = $_POST['rawdata'][$our . $k];
+			$_POST['data']['their' . $k] = $_POST['rawdata'][$their . $k];
+		}
 	}
+
+	private function GetPageTitle($teamID, $displaySeason, $gameType)
+	{
+		$seasonID   = $displaySeason['Season']['id'];
+		$seriestext = '';
+		$typetext   = 'Alla';
+		$seasontext = 'Alla';
+		$teamtext   = '';
+
+		if ( $seasonID != 0 ) {
+			$seasontext = substr($displaySeason['Season']['startdate'], 0, 4) . '-' . substr($displaySeason['Season']['enddate'], 0, 4);
+			if ( $gameType == 'seriematch' ) {
+				$seasonTeam = $this->Game->Team->Seasonteamtable->GetTableBySeasonTeam($seasonID, $teamID);
+				$seriestext = ' - ' . $seasonTeam['Seasonteamtable']['division'];	
+			}
+		}
+
+		if ( $gameType != 'alla' ) {
+			$type = current($this->Game->Gameformat->GetBySlug($gameType));
+			$typetext = $type['Gameformat']['name'];
+		}
+
+		$team = current($this->Game->Team->GetById($teamID));
+		$teamtext = $team['Team']['name'];
+
+		return 'Matcher (' . $seasontext . ') - Matchtyp: ' . $typetext . ' - ' . $teamtext . $seriestext;
+	}
+
 
 }
