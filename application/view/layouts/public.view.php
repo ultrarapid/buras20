@@ -14,7 +14,9 @@
     <link rel="shortcut icon" href="<?= Anchors::Refer('base') ?>/favicon.ico" />
     <link rel="apple-touch-icon" href="<?= Anchors::Refer('base') ?>/phone-small.png" />
     <link rel="apple-touch-icon" sizes="114x114" href="<?= Anchors::Refer('base') ?>/phone-large.png" />
-    <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') ?>/public-preloader.js"></script>
+    <script type="text/javascript">
+      document.documentElement.className = 'jsActive';
+    </script>
     <!--[if lt IE 9]>
       <script src="<?= Anchors::Refer('javascript_folder') ?>/html5-js/dist/html5shiv.js"></script>
     <![endif]-->    
@@ -131,7 +133,9 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <script type="text/javascript" src="<?= Anchors::Refer('javascript_folder') ?>/public-postloader.js"></script>
+    <script type="text/javascript">
+      document.documentElement.className = '';
+    </script>
 <?php if ( isset($toConsole) ) : ?>
     <script type="text/javascript">
 <?php   if ( is_array($toConsole) ) : ?>
