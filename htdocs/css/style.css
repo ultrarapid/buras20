@@ -409,7 +409,7 @@ article.status time span.at-character {
 
 .table-stats-wrapper, .player-stats-wrapper, .powerplay-stats-wrapper {
 	float: left;
-	margin: 0 2%;
+	margin: 0 4% 0 0;
 }
 
 .table-stats-wrapper {
