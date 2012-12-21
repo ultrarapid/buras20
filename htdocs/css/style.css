@@ -834,7 +834,8 @@ div.player-status p.player-name-list {
 }
 
 div.player-status p.player-name-details {
-  font-size: 2.5em;
+	color: #444;
+  font-size: 3em;
 }
 
 div.player-filler {
@@ -844,11 +845,13 @@ div.player-filler {
 }
 
 div.player-stat {
+	color: #555;
 	font-size: 0.8em;
 	margin: 16px 0 0 0;
 }
 
 div.player-stat-value {
+	color: #333;
 	font-size: 1.5em;
 }
 
