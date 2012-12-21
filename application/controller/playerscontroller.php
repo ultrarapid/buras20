@@ -269,6 +269,7 @@ class PlayersController extends App_Controller
 			//$this->Player->Playerstat->displayQuery = true;
 			$this->Set('playerstats', $this->Player->Playerstat->GetByStatus(1));
 			$this->Set('playerdetails', 1);
+			$this->Set('layoutTitle', $player[0]['Player']['firstname'] . ' ' . $player[0]['Player']['lastname'] . ' - ' . $thisSeasonUrl . ' - Burås Innebandy');
 		}
 		$this->Set('activeSection', $activeSection);		
 		$this->Set('activeSeason', $activeSeason);

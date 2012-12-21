@@ -11,7 +11,9 @@
               </a>
 <?php       endif; ?>
 <?php     else: ?>
+<?php       if ( $playerdetails == 0 ) : ?>
               <div class="player-filler"></div>
+<?php       endif; ?>
 <?php     endif; ?>
 <?php     if ( $playerdetails == 0 ) : ?>
               <p class="player-name-list">
