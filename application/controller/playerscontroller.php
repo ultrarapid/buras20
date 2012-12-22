@@ -257,11 +257,14 @@ class PlayersController extends App_Controller
 		$thisSeasonID  = $thisSeason ? $thisSeason['Season']['id'] : 0;
 		$thisSeasonUrl = $thisSeasonID ? substr($thisSeason['Season']['startdate'], 0, 4) . '-' . substr($thisSeason['Season']['enddate'], 0, 4) : 'alla';
 
+		$team = current($this->Player->Seasonteamplayer->Team->GetById($teamID));
+		$teamtext = $team['Team']['name'];
 
 		if ( empty($playerSlug) ) {
 			//$season = $this->Player->Seasonteamplayer->Season->GetActiveSeason();
 			$this->Set('players', $this->Player->GetPlayersInSeasonTeam($thisSeasonID, $teamID));
 			$this->Set('playerdetails', 0);
+			$this->Set('layoutTitle', $teamtext . ', ' . $thisSeasonUrl . ' - Burås Innebandy');
 		} else {
 			$player = $this->Player->GetBySlug($playerSlug);
 			$this->Set('players', $player);
@@ -269,7 +272,7 @@ class PlayersController extends App_Controller
 			//$this->Player->Playerstat->displayQuery = true;
 			$this->Set('playerstats', $this->Player->Playerstat->GetByStatus(1));
 			$this->Set('playerdetails', 1);
-			$this->Set('layoutTitle', $player[0]['Player']['firstname'] . ' ' . $player[0]['Player']['lastname'] . ' - ' . $thisSeasonUrl . ' - Burås Innebandy');
+			$this->Set('layoutTitle', $player[0]['Player']['firstname'] . ' ' . $player[0]['Player']['lastname'] . ' - ' . $teamtext . ', ' . $thisSeasonUrl . ' - Burås Innebandy');
 		}
 		$this->Set('activeSection', $activeSection);		
 		$this->Set('activeSeason', $activeSeason);
