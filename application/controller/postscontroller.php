@@ -117,7 +117,7 @@ class PostsController extends App_Controller
 		$this->SetContext('public', array(0 => 'nivo/nivo-slider/jquery.nivo.slider.pack', 1 => 'loader'), array(), array(0 => array('ElementName' => 'link', 'Attributes' => $attributes)));
 	}
 
-	public function index($section = 1, $year = '', $month = '', $post = '')
+	public function index($sectionID = 1, $year = '', $month = '', $post = '')
 	{
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		  if ( $_POST['fix'] == 'hej' || $_POST['fix'] == '"hej"') {
@@ -131,20 +131,22 @@ class PostsController extends App_Controller
 				$this->Redirect($_SERVER['REQUEST_URI']);
 			}
 		}
+		$section = PublicWrapper::GetSection();
+		$activeSection = current($section->GetById($sectionID));		
 		if ( !empty($post) ) {
 			$posts = $this->Post->GetByUrl($post);
 			$this->Set('posts', $posts);
 			$this->Set('singlepost', true);
-			$this->Set('layoutTitle', $posts[0]['Post']['header'] . ' - Innebandynyheter ');
+			$this->Set('layoutTitle', $posts[0]['Post']['header'] . ' - Innebandy' . strtolower($activeSection['Section']['name']));
 		} else {
 			$this->Post->limit = array('start' => 0, 'end' => $this->_paging);
-			$this->Post->conditions = array(0 => array('field' => 'section_id', 'value' => $section), 1 => array('field' => 'published', 'value' => 1)); 
+			$this->Post->conditions = array(0 => array('field' => 'section_id', 'value' => $sectionID), 1 => array('field' => 'published', 'value' => 1)); 
 			$this->Set('posts', $this->Post->Get());
 			$this->Set('singlepost', false);
-			$this->Set('amount', $this->Post->CountConditional());
-			$this->SetContext('public', array(0 => 'more-news'));	
+			$this->Set('amount', $this->Post->CountConditional());			
+			//$this->SetContext('public', array(0 => 'more-news'));	
 		}
-		if ( $section == 3 ) {
+		if ( $sectionID == 3 ) {
 			$game = new Game();
 			$this->Set('upcomingGames', $game->GetUpcomingGames());
 			$this->Set('latestNews', $this->Post->GetLatestPosts(1));
