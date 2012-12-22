@@ -14,3 +14,6 @@ sftp-config.json
 
 #temporary files
 tmp/**/*
+
+#projectplanning
+todo.txt
