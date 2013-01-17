@@ -74,7 +74,7 @@ class Gameevent extends App_Model
 		$seasonID = $game['Game']['season_id'];
 		$teamID = $game['Game']['team_id'];
 		$gameformatID = 1;
-		$gameeventMethods = array('GetBoxplayGoalsBySeasonTeam', 'GetPowerplayGoalsBySeasonTeam', 'GetPowerPlayOpportunitiesBySeasonTeam', 'GetTopPasserBySeasonTeam', 'GetTopPenaltyBySeasonTeam', 'GetTopPointsBySeasonTeam', 'GetTopScorerBySeasonTeam');
+		$gameeventMethods = array('GetBoxplayGoalsBySeasonTeam', 'GetPowerplayGoalsBySeasonTeam', 'GetPowerPlayOpportunitiesBySeasonTeam', 'GetTopPasserBySeasonTeam', 'GetTopPenaltyBySeasonTeam', 'GetTopPointsBySeasonTeam', 'GetTopScorerBySeasonTeam', 'GetAllStatsBySeasonTeam');
 		foreach ( $this->GetCachedFiles() as $f ) {
 			foreach ( $gameeventMethods as $m ) {
 				if ( strpos($f, $m . '-' . $seasonID . '-' . $teamID . '-' . $gameformatID) !== false || strpos($f, $m . '-' . 0 . '-' . $teamID . '-' . $gameformatID ) !== false ) {
@@ -89,6 +89,97 @@ class Gameevent extends App_Model
 		}
 	}
 
+/**
+	* Gets players with most markings as primaryplayer on goal events
+	*
+	* @param  integer Season ID
+	* @param  integer Team ID	
+	* @param  integer Amount of players to fetch	
+	* @throws none
+	* @return array With Player id, name and amount of goals
+	*/
+	public function GetAllStatsBySeasonTeam($seasonID, $teamID, $gameformatID = 1, $count = 1, $cached = 1)
+	{
+		$limit = ($count == 0) ? '' : ' LIMIT 0, ?';
+		if ( $cached == 0 ) {
+			$stmt = 'SELECT p.id AS Player_id, p.firstname AS Player_firstname, p.lastname AS Player_lastname, COUNT(gs.id) as Player_playedgames, (
+						SELECT COUNT(ge.id) as Player_goals
+						FROM bik_gameevents as ge
+						INNER JOIN bik_games as g
+						ON ge.game_id = g.id
+						WHERE ge.eventtype = 1 
+						AND ge.thisteam = 1 
+						AND ge.primaryplayer_id = gs.player_id
+						AND (g.season_id = ? OR 0 = ?)
+						AND (g.team_id = ? OR 0 = ?)
+						AND (g.gameformat_id = ? OR 0 = ?)
+						GROUP BY primaryplayer_id
+					) as Player_goals, (
+						SELECT COUNT(ge.id) as Player_assists
+						FROM bik_gameevents as ge
+						INNER JOIN bik_games as g
+						ON ge.game_id = g.id
+						WHERE ge.eventtype = 1 
+						AND ge.thisteam = 1 
+						AND ge.secondaryplayer_id = gs.player_id
+						AND (g.season_id = ? OR 0 = ?)
+						AND (g.team_id = ? OR 0 = ?)
+						AND (g.gameformat_id = ? OR 0 = ?)
+						GROUP BY secondaryplayer_id
+					) as Player_assists, (
+						SELECT COUNT(ge.id) 
+						FROM bik_gameevents AS ge
+						INNER JOIN bik_games AS g
+						ON g.id = ge.game_id
+						WHERE (ge.primaryplayer_id = gs.player_id OR ge.secondaryplayer_id = gs.player_id )
+						AND ge.thisteam = 1 
+						AND ge.eventtype = 1
+						AND (g.season_id = ? OR 0 = ?)
+						AND (g.team_id = ? OR 0 = ?)
+						AND (g.gameformat_id = ? OR 0 = ?)
+					) as Player_points, (
+						SELECT SUM(MINUTE(ge.playertime))
+						FROM bik_gameevents as ge
+						INNER JOIN bik_games as g
+						ON ge.game_id = g.id
+						WHERE ge.eventtype = 2 
+						AND ge.thisteam = 1 
+						AND ge.primaryplayer_id = gs.player_id
+						AND (g.season_id = ? OR 0 = ?)
+						AND (g.team_id = ? OR 0 = ?)
+						AND (g.gameformat_id = ? OR 0 = ?)
+						GROUP BY primaryplayer_id
+					) as Player_pim from  bik_players as p
+					INNER JOIN bik_season_team_players as stp
+					ON stp.player_id = p.id
+					AND (stp.season_id = ? OR 0 = ?)
+					AND (stp.team_id = ? OR 0 = ?)
+					INNER JOIN bik_gamesetups as gs
+					ON gs.player_id = p.id 
+					AND game_id IN (
+						SELECT id 
+						FROM bik_games 
+						WHERE (season_id = ? OR 0 = ?)
+						AND (team_id = ? OR 0 = ?)
+						AND (gameformat_id = ? OR 0 = ?)
+					) GROUP BY gs.player_id
+					ORDER BY Player_points DESC, Player_goals DESC, Player_playedgames' . $limit;
+
+			$values = array();
+
+			if ( $count == 0 ) {
+				$values = array($seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID);
+			} else {
+				$values = array($seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $seasonID, $seasonID, $teamID, $teamID, $seasonID, $seasonID, $teamID, $teamID, $gameformatID, $gameformatID, $count);				
+			}
+			return $this->GetResult($stmt, $values);
+		}
+
+		$args = func_get_args();
+		array_push($args, 0);
+
+		return $this->CreateCache(__FUNCTION__, $args);
+	}
 
  /**
 	* Gets made boxplay goals
@@ -759,5 +850,74 @@ class Gameevent extends App_Model
 		}
 		return $geArr;	
 	}
+
+
+
+/*
+SELECT p.id, p.firstname, p.lastname, COUNT(gs.id) as playedgames, (
+
+SELECT COUNT(ge.id) as Player_goals
+FROM bik_gameevents as ge
+INNER JOIN bik_games as g
+ON ge.game_id = g.id
+WHERE ge.eventtype = 1 
+AND ge.thisteam = 1 
+AND ge.primaryplayer_id = gs.player_id
+AND (g.season_id = 6 OR 0 = 6)
+AND (g.team_id = 1 OR 0 = 1)
+AND (g.gameformat_id = 1 OR 0 = 1)
+GROUP BY primaryplayer_id
+
+) as goals, (
+
+SELECT COUNT(ge.id) as Player_assists
+FROM bik_gameevents as ge
+INNER JOIN bik_games as g
+ON ge.game_id = g.id
+WHERE ge.eventtype = 1 
+AND ge.thisteam = 1 
+AND ge.secondaryplayer_id = gs.player_id
+AND (g.season_id = 6 OR 0 = 6)
+AND (g.team_id = 1 OR 0 = 1)
+AND (g.gameformat_id = 1 OR 0 = 1)
+GROUP BY secondaryplayer_id
+
+) as assists, (
+
+SELECT COUNT(ge.id) 
+FROM bik_gameevents AS ge
+INNER JOIN bik_games AS g
+ON g.id = ge.game_id
+WHERE (ge.primaryplayer_id = gs.player_id OR ge.secondaryplayer_id = gs.player_id )
+AND ge.thisteam = 1 
+AND ge.eventtype = 1
+AND (g.season_id = 6 OR 0 = 6)
+AND (g.team_id = 1 OR 0 = 1)
+AND (g.gameformat_id = 1 OR 0 = 1)
+
+) as points, (
+
+SELECT SUM(MINUTE(ge.playertime))
+FROM bik_gameevents as ge
+INNER JOIN bik_games as g
+ON ge.game_id = g.id
+WHERE ge.eventtype = 2 
+AND ge.thisteam = 1 
+AND ge.primaryplayer_id = gs.player_id
+AND (g.season_id = 6 OR 0 = 6)
+AND (g.team_id = 1 OR 0 = 1)
+AND (g.gameformat_id = 1 OR 0 = 1)
+GROUP BY primaryplayer_id
+
+) as um from  bik_players as p
+inner join bik_season_team_players as stp
+on stp.player_id = p.id and stp.team_id = 1 and stp.season_id = 6
+inner join bik_gamesetups as gs
+on gs.player_id = p.id AND game_id IN (SELECT id from bik_games where team_id = 1 and season_id = 6)
+GROUP BY gs.player_id
+ORDER BY points DESC, goals DESC, playedgames
+
+*/
+
 
 }

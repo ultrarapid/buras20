@@ -78,7 +78,13 @@ class TeamsController extends App_Controller
 
 			$this->Set('opowerplaygoals', $this->Team->Game->Gameevent->GetPowerplayGoalsBySeasonTeam($seasonID, $id, 1, 0));
 
-			$this->Set('oppopportunities', $this->Team->Game->Gameevent->GetPowerPlayOpportunitiesBySeasonTeam($seasonID, $id, 1, 0));			
+			$this->Set('oppopportunities', $this->Team->Game->Gameevent->GetPowerPlayOpportunitiesBySeasonTeam($seasonID, $id, 1, 0));
+
+//$this->Team->Game->Gameevent->displayQuery = true;
+
+			$this->Set('allplayerstats', $this->Team->Game->Gameevent->GetAllStatsBySeasonTeam($seasonID, $id, 1, 0));
+
+//$this->Team->Game->Gameevent->displayQuery = false;
 
 			$this->Set('thisteam', $this->Team->Game->thisTeam);
 			

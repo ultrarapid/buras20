@@ -245,6 +245,7 @@
             </section>
 <?php endif; ?>
           </div>
+          <div style="clear: both;"></div
           <div id="div-section-<?= $section['Section']['id'] ?>" class="page-content">
 <?php	if ( isset($section['Section']['body']) ) : ?>
             <p class="page-body">
@@ -253,6 +254,41 @@
             </p>
 <?php endif; ?>
           </div>
+          <section class="full-player-statistics">
+<?php if ( !empty($allplayerstats) ) : ?>
+            <header>
+              <h3>Spelarstatistik</h3>
+            </header>
+            <table>
+              <thead>
+                <tr>
+                  <td></td>
+                  <td>Namn</td>
+                  <td>SM</td>
+                  <td>M</td>
+                  <td>A</td>
+                  <td>P</td>
+                  <td>UM</td>
+                </tr>
+              </thead>
+              <tbody>
+<?php   $count = 1; ?>
+<?php   foreach ( $allplayerstats as $k => $p) : ?>
+<?php     if ( $k != 0 && ( $p['Player']['playedgames'] != $allplayerstats[$k-1]['Player']['playedgames'] || $p['Player']['goals'] != $allplayerstats[$k-1]['Player']['goals'] || $p['Player']['assists'] != $allplayerstats[$k-1]['Player']['assists']) ) { $count = $k + 1; } ?>
+                <tr>
+                  <td><?= $count ?></td>
+                  <td><?= $p['Player']['firstname'] . ' ' . $p['Player']['lastname'] ?></td>
+                  <td><?= $p['Player']['playedgames'] ?></td>
+                  <td><?= $p['Player']['goals'] ?></td>
+                  <td><?= $p['Player']['assists'] ?></td>
+                  <td><?= $p['Player']['points'] ?></td>
+                  <td><?= $p['Player']['pim'] ?></td>
+                </tr>
+<?php   endforeach; ?>
+              </tbody>
+            </table>
+<?php endif; ?>
+          </section>
           <section class="history-nav">
 <?php if ( !empty($seasons) ) : ?>
             <nav class="season-nav">

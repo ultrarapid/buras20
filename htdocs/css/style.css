@@ -477,7 +477,7 @@ section.table-summary {
 /*	margin-left: 440px;*/
 }
 
-section.table-summary h3, section.top-list h3, .powerplay-stats-wrapper h3 {
+section.table-summary h3, section.top-list h3, .powerplay-stats-wrapper h3, section.full-player-statistics h3 {
 	color: #666;
 	font-family: Arimo, Arial, Helvetica, sans-serif;
 	font-weight: bold;
@@ -535,6 +535,34 @@ section.top-penalty table td span {
 	color: #666;
 	font-size: 0.9em;
 	text-align: right;	
+}
+
+section.full-player-statistics {
+	margin: 50px 0 0;
+}
+
+section.full-player-statistics table {
+	margin: 10px 0 0;
+}
+
+section.full-player-statistics td {
+	padding: 3px 24px;
+}
+
+section.full-player-statistics thead td {
+	text-align: center;
+}
+
+section.full-player-statistics tr td {
+	text-align: right;
+}
+
+section.full-player-statistics tr td:nth-child(2) {
+	text-align: left;
+}
+
+section.full-player-statistics tr td:first-child {
+	padding: 3px 2px;
 }
 
 
