@@ -13,8 +13,9 @@ class SectionsController extends App_Controller
 		}
 		if ( $id != 0 ) {
 			$this->Set('set', 1);
-			$section = current($this->Section->GetById($id));
-			$this->Set('section', $section);
+			$sectionen = current($this->Section->GetById($id));
+			$this->Set('sectionen', $sectionen);
+			
 		} else {
 			$this->Set('set', 0);
 			$this->Set('section', array('Section' => array('visible' => 1, 'postsection' => 0, 'comment_enabled' => 0)));
