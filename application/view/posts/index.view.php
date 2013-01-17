@@ -91,7 +91,7 @@
               </article>
 <?php		  endforeach; ?>
             </div>
-<?php     if ( $amount > ($k+1) ) : ?>
+<?php     if ( !$singlepost && $amount > ($k+1) ) : ?>
             <div class="div-more-posts">
               <a id="more-posts" href="#">Visa fler &raquo;</a>
               <input type="hidden" value="<?= $post['Post']['id'] ?>" id="last_id" />
@@ -99,7 +99,9 @@
             </div>
 <?php     endif; ?>
 <?php   endif; ?>
+<?php   if ( !$singlepost ) : ?>
             <input type="hidden" name="amount" value="<?= $amount ?>" />
             <input type="hidden" name="k-add-one" value="<?= ($k+1) ?>" />
+<?php   endif; ?>
 <?php	endif; ?>
           </div>
