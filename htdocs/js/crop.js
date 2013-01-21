@@ -2,12 +2,14 @@ $(document).ready(function(){
 	$('#cropbox_thumb_ar1').Jcrop({
 		onChange: showPreview,
 		onSelect: showPreview,
-		aspectRatio: 1
+		aspectRatio: 1,
+		setSelect: [ 0, 0, 50, 50]
 	});
 	
 	$('#cropbox').Jcrop({
 		onChange: updateCoords,
-		onSelect: updateCoords
+		onSelect: updateCoords,
+		setSelect: [ 0, 0, 50, 50 ]
 	});
 	
 	if ( $('img.thumb').length > 0 ) {
